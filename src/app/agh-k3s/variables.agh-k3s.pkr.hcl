@@ -15,8 +15,8 @@ vm--os_type = "ubuntu64Guest"
 // Virtual Machine Hardware Settings
 vm--firmware              = "efi"
 vm--cdrom_type            = "sata"
-vm--cpu_sockets           = 1
-vm--cpu_cores             = 8
+vm--cpu_sockets           = 8
+vm--cpu_cores             = 1
 vm--cpu_hot_add           = false
 vm--mem_size              = 16384
 vm--mem_hot_add           = false
