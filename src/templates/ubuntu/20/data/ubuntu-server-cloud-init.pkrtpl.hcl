@@ -15,14 +15,6 @@ autoinstall:
   locale: ${language}
   keyboard:
     layout: ${keyboard}
-  network:
-    version: 2
-    ethernets:
-      eth0:
-        addresses:
-          - ${ip}
-        gateway4: ${gateway}
-        nameservers: $(nameservers)
   storage:
     layout:
       name: lvm

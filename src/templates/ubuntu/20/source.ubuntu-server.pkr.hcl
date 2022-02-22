@@ -73,6 +73,10 @@ source "vsphere-iso" "ubuntu-server" {
     "linux /casper/vmlinuz --- autoinstall seedfrom=http://{{.HTTPIP}}:{{.HTTPPort}}/",
     "<enter><wait>",
     "initrd /casper/initrd",
+    " netcfg/get_ipaddress=${var.vm--ip}",
+    " netcfg/get_gateway=${var.vm--gateway}",
+    " netcfg/get_nameservers=${var.vm--nameservers}",
+    " netcfg/confirm_static=true",
     "<enter><wait>",
     "boot",
     "<enter>"
