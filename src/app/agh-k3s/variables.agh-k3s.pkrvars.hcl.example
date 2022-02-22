@@ -5,3 +5,4 @@ auth--ssh_timeout        = "30m"
 // Authentication
 auth--username           = "agh-user"
 auth--password           = "password"
+auth--password_encrypted = "$6$4096$B4rZCyN5MXGeiTXK0Oe47FfKBcnuvSO2FbRTsq0U8Ms/w4U8gB.UAlXrV75zw3csrWMUAl9A6dEOT4Cl8DCrY1"
