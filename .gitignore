@@ -28,3 +28,4 @@ crash.log
 
 # General
 .DS_Store
+*.log
