@@ -75,6 +75,7 @@ source "vsphere-iso" "ubuntu-server" {
     "initrd /casper/initrd",
     " netcfg/get_ipaddress=${var.vm--ip}",
     " netcfg/get_gateway=${var.vm--gateway}",
+    " netcfg/get_netmask=${var.vm--netmask}",
     " netcfg/get_nameservers=${var.vm--nameservers}",
     " netcfg/confirm_static=true",
     "<enter><wait>",

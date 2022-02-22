@@ -1,7 +1,8 @@
 // Guest Operating System Metadata
 vm--name        = "AGH-K3s-Master"
 vm--hostname    = "agh-k3s-master"
-vm--ip          = "10.20.4.1/16"
+vm--ip          = "10.20.4.1"
+vm--netmask     = "255.255.0.0"
 vm--gateway     = "10.20.0.1"
 vm--nameservers = "10.20.0.1, 1.1.1.1"
 
