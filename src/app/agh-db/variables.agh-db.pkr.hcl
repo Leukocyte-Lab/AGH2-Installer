@@ -1,10 +1,9 @@
 // Guest Operating System Metadata
 vm--name        = "AGH-DB"
 vm--hostname    = "agh-db"
-vm--ip          = "10.20.4.2"
-vm--netmask     = "255.255.0.0"
+vm--ip          = "10.20.4.2/16"
 vm--gateway     = "10.20.0.1"
-vm--nameservers = "10.20.0.1, 1.1.1.1"
+vm--nameservers = ["10.20.0.1", "1.1.1.1"]
 
 vm--language = "en_US"
 vm--keyboard = "us"

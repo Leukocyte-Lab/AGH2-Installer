@@ -70,9 +70,9 @@ source "vsphere-iso" "ubuntu-server" {
   boot_command = [
     "<esc><esc><esc><wait>",
     "<enter><wait>",
-    "/casper/vmlinuz ",
+    "linux /casper/vmlinuz ",
     "root=/dev/sr0 ",
-    "initrd=/casper/initrd ",
+    "initrd /casper/initrd ",
     "autoinstall ",
     "ds=nocloud-net;s=http://{{.HTTPIP}}:{{.HTTPPort}}/",
     "<enter>"

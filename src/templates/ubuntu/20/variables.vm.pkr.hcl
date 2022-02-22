@@ -9,18 +9,13 @@ variable "vm--ip" {
   description = "The ip of VM."
 }
 
-variable "vm--netmask" {
-  type        = string
-  description = "The netmask of VM."
-}
-
 variable "vm--gateway" {
   type        = string
   description = "The gateway of VM."
 }
 
 variable "vm--nameservers" {
-  type        = string
+  type        = list(string)
   description = "The nameservers of VM."
 }
 
