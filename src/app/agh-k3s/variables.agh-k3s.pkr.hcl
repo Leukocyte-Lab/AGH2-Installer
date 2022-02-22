@@ -26,4 +26,6 @@ vm--disk_thin_provisioned = true
 vm--network_card          = "vmxnet3"
 
 // Provisioner Settings
-vm--init-scripts = []
+vm--init-scripts = [
+  "./scripts/install-k3s.sh",
+]
