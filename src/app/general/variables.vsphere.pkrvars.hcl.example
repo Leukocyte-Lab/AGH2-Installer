@@ -9,13 +9,24 @@ vc--insecure_connection = true
 vc--datacenter = "Datacenter"
 vc--datastore  = "Datasore"
 vc--network    = "VM Network"
-vc--folder     = "templates/packer/ubuntu"
 
 
 // Virtual Machine Settings
-vm--version           = 19
+vm--version              = 19
 vm--tools_upgrade_policy = true
 vm--remove_cdrom         = true
+
+// Boot Settings
+vm--boot_order = "disk,cdrom"
+vm--boot_wait  = "5s"
+
+// Removable Media Settings
+vm--iso_urls           = [
+  "artifacts/images/ubuntu-20.04.3-live-server-amd64.iso",
+  "https://releases.ubuntu.com/focal/ubuntu-20.04.3-live-server-amd64.iso"
+]
+vm--iso_hash  = "sha256"
+vm--iso_checksum = "f8e3086f3cea0fb3fefb29937ab5ed9d19e767079633960ccb50e76153effc98"
 
 // Boot and Provisioning Settings
 vm--http_port_min    = 8000
