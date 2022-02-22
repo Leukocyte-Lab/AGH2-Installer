@@ -5,4 +5,3 @@ auth--ssh_timeout        = "30m"
 // Authentication
 auth--username           = "db-user"
 auth--password           = "password"
-auth--password_encrypted = "$6$XKs7F01vE$tav4gsQ9ueTAKB59wZxZe6EU80rLaNccUwIDxVMISxKLaEXI4YhUq4Ygd4fnutluu3DBzReFBBcADshe.ZRxX0"
