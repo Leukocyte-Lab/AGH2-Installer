@@ -9,5 +9,6 @@ build {
       "IP=${var.vm--ip}"
     ]
     scripts = var.vm--init-scripts
+    expect_disconnect = true
   }
 }
