@@ -8,7 +8,7 @@ autoinstall:
       - arches: [amd64, i386]
         uri: http://tw.archive.ubuntu.com/ubuntu
       - arches: [default]
-        uri: http://ports.ubuntu.com/ubuntu-ports    
+        uri: http://ports.ubuntu.com/ubuntu-ports
   early-commands:
     # Ensures that Packer does not connect too soon.
     - sudo systemctl stop ssh
