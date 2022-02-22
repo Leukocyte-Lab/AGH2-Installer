@@ -24,16 +24,22 @@ autoinstall:
     password: ${password_encrypted}
   network:
     network:
-    version: 2
-    ethernets:
-      ens192:
-        dhcp4: false
-        dchp6: false
-        addresses:
-          - ${ip}
-        gateway4: ${gateway}
-        nameservers:
-          addresses: [$(nameservers)]
+      version: 2
+      ethernets:
+        ens192:
+          dhcp4: false
+          dhcp6: false
+          addresses:
+            - ${ip}
+          gateway4: ${gateway}
+          nameservers:
+            addresses:
+              - ${nameserver}
+              - 1.1.1.1
+              - 8.8.8.8
+          match:
+            name: en*|ens*|eth*
+          set-name: ens192
   ssh:
     install-server: true
     allow-pw: true

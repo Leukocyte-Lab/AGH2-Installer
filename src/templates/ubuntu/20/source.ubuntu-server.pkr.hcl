@@ -58,7 +58,7 @@ source "vsphere-iso" "ubuntu-server" {
       password_encrypted  = var.auth--password_encrypted
       ip                  = var.vm--ip
       gateway             = var.vm--gateway
-      nameservers         = var.vm--nameservers
+      nameserver          = var.vm--nameserver
       language            = var.vm--language
       keyboard            = var.vm--keyboard
       timezone            = var.vm--timezone
