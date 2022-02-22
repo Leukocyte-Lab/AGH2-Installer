@@ -55,10 +55,10 @@ source "vsphere-iso" "ubuntu-server" {
     "/user-data"          = templatefile("data/ubuntu-server-cloud-init.yaml", {
       hostname            = var.vm--hostname
       username            = var.auth--username
+      password_encrypted  = var.auth--password_encrypted
       ip                  = var.vm--ip
       gateway             = var.vm--gateway
       nameservers         = var.vm--nameservers
-      password_encrypted  = var.auth--password_encrypted
       language            = var.vm--language
       keyboard            = var.vm--keyboard
       timezone            = var.vm--timezone
@@ -70,11 +70,13 @@ source "vsphere-iso" "ubuntu-server" {
   boot_command = [
     "<esc><esc><esc><wait>",
     "<enter><wait>",
-    "linux /casper/vmlinuz ",
-    "root=/dev/sr0 ",
-    "initrd /casper/initrd ",
+    "linux /casper/vmlinuz quiet ",
     "autoinstall ",
-    "ds=nocloud-net;s=http://{{.HTTPIP}}:{{.HTTPPort}}/",
+    "ds=\"nocloud-net;s=http://{{.HTTPIP}}:{{.HTTPPort}}/\" ---",
+    "<enter><wait>",
+    "initrd /casper/initrd",
+    "<enter><wait>",
+    "boot",
     "<enter>"
   ]
   ip_wait_timeout  = var.vm--ip_wait_timeout
