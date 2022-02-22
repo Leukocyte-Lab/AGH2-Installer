@@ -6,8 +6,7 @@ build {
     environment_vars = [
       "USERNAME=${var.auth--username}",
       "SSH_KEY=${var.auth--ssh_key}",
-
     ]
-    scripts = var.scripts
+    scripts = var.vm--init-scripts
   }
 }

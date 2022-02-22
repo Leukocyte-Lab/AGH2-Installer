@@ -2,8 +2,8 @@
 vm--language = "en_US"
 vm--keyboard = "us"
 vm--timezone = "UTC"
-vm--family   = "linux"
-vm--name     = "ubuntu"
+vm--name     = "AGH-K3s-Master"
+vm--hostname = "agh-k3s-master"
 
 // Virtual Machine Guest Operating System Setting
 vm--os_type = "ubuntu64Guest"
@@ -21,17 +21,5 @@ vm--disk_controller_type  = ["pvscsi"]
 vm--disk_thin_provisioned = true
 vm--network_card          = "vmxnet3"
 
-// Boot Settings
-vm--boot_order = "disk,cdrom"
-vm--boot_wait  = "5s"
-
-// Removable Media Settings
-vm--iso_urls           = [
-  "artifacts/images/ubuntu-20.04.3-live-server-amd64.iso",
-  "https://releases.ubuntu.com/focal/ubuntu-20.04.3-live-server-amd64.iso"
-]
-vm--iso_checksum_type  = "sha256"
-vm--iso_checksum_value = "f8e3086f3cea0fb3fefb29937ab5ed9d19e767079633960ccb50e76153effc98"
-
 // Provisioner Settings
-scripts = []
+vm--init-scripts = []

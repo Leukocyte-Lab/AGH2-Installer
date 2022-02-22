@@ -2,6 +2,7 @@
 vc--endpoint            = "vsphere.local"
 vc--username            = "administrator@vsphere.local"
 vc--password            = "VMware123!"
+vc--host                = "esxi.local"
 vc--insecure_connection = true
 
 // vSphere Settings
@@ -12,9 +13,9 @@ vc--folder     = "templates/packer/ubuntu"
 
 
 // Virtual Machine Settings
-vc--vm_version           = 19
-vc--tools_upgrade_policy = true
-vc--remove_cdrom         = true
+vm--version           = 19
+vm--tools_upgrade_policy = true
+vm--remove_cdrom         = true
 
 // Boot and Provisioning Settings
 vm--http_port_min    = 8000

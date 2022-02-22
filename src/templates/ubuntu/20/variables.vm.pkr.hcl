@@ -1,4 +1,9 @@
 // Virtual Machine Settings
+variable "vm--hostname" {
+  type        = string
+  description = "The hostname of VM."
+}
+
 variable "vm--name" {
   type        = string
   description = "The name of VM."
@@ -22,21 +27,6 @@ variable "vm--timezone" {
   default     = "UTC"
 }
 
-variable "vm--family" {
-  type        = string
-  description = "The guest operating system family. Used for naming. (e.g.'linux')"
-}
-
-variable "vm--vendor" {
-  type        = string
-  description = "The guest operating system vendor. Used for naming . (e.g. 'ubuntu')"
-}
-
-variable "vm--member" {
-  type        = string
-  description = "The guest operating system member. Used for naming. (e.g. 'server')"
-}
-
 variable "vm--os_type" {
   type        = string
   description = "The guest operating system type, also know as guestid. (e.g. 'ubuntu64Guest')"
@@ -52,6 +42,18 @@ variable "vm--cdrom_type" {
   type        = string
   description = "The virtual machine CD-ROM type. (e.g. 'sata', or 'ide')"
   default     = "sata"
+}
+
+variable "vm--tools_upgrade_policy" {
+  type        = bool
+  description = "Upgrade VMware Tools on reboot."
+  default     = true
+}
+
+variable "vm--remove_cdrom" {
+  type        = bool
+  description = "Remove the virtual CD-ROM(s)."
+  default     = true
 }
 
 variable "vm--cpu_sockets" {
@@ -107,12 +109,14 @@ variable "vm--network_card" {
 variable "vm--version" {
   type        = number
   description = "The vSphere virtual hardware version. (e.g. '18')"
+  default     = 13
 }
 
 // Removable Media Settings
 variable "vm--iso_urls" {
+  type        = list(string)
   description = "The URL of the remote ISO to use"
-  default     = null
+  default     = []
 }
 
 variable "vm--iso_hash" {
@@ -146,6 +150,17 @@ variable "vm--boot_order" {
 variable "vm--boot_wait" {
   type        = string
   description = "The time to wait before boot."
+}
+
+
+variable "vm--ip_wait_timeout" {
+  type        = string
+  description = "Time to wait for guest operating system IP address response."
+}
+
+variable "vm--shutdown_timeout" {
+  type        = string
+  description = "Time to wait for guest operating system shutdown."
 }
 
 // Provisioner Settings
