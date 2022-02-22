@@ -11,6 +11,12 @@ variable "auth--password" {
   sensitive   = true
 }
 
+variable "auth--password_encrypted" {
+  type        = string
+  description = "The password to login to the guest operating system."
+  sensitive   = true
+}
+
 variable "auth--ssh_key" {
   type        = string
   description = "The public key to login to the guest operating system."

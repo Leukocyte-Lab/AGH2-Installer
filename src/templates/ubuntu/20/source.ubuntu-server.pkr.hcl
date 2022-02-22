@@ -15,7 +15,6 @@ source "vsphere-iso" "ubuntu-server" {
   host       = var.vc--host
   cluster    = var.vc--cluster
   datastore  = var.vc--datastore
-  folder     = var.vc--folder
 
   // Virtual Machine Settings
   guest_os_type        = var.vm--os_type
@@ -53,13 +52,13 @@ source "vsphere-iso" "ubuntu-server" {
   http_port_max = var.vm--http_port_max
   http_content = {
     "/meta-data"          = file("data/meta-data")
-    "/user-data"          = templatefile("data/ubuntu-server-cloud-init.pkrtpl.hcl", {
+    "/user-data"          = templatefile("data/ubuntu-server-cloud-init.yaml", {
       hostname            = var.vm--hostname
       username            = var.auth--username
       ip                  = var.vm--ip
       gateway             = var.vm--gateway
       nameservers         = var.vm--nameservers
-      password_encrypted  = bcrypt(var.auth--password)
+      password_encrypted  = var.auth--password_encrypted
       language            = var.vm--language
       keyboard            = var.vm--keyboard
       timezone            = var.vm--timezone
@@ -69,17 +68,13 @@ source "vsphere-iso" "ubuntu-server" {
   boot_order = var.vm--boot_order
   boot_wait  = var.vm--boot_wait
   boot_command = [
-    "<esc><wait>",
-    "linux /casper/vmlinuz --- autoinstall seedfrom=http://{{.HTTPIP}}:{{.HTTPPort}}/",
+    "<esc><esc><esc><wait>",
     "<enter><wait>",
-    "initrd /casper/initrd",
-    " netcfg/get_ipaddress=${var.vm--ip}",
-    " netcfg/get_gateway=${var.vm--gateway}",
-    " netcfg/get_netmask=${var.vm--netmask}",
-    " netcfg/get_nameservers=${var.vm--nameservers}",
-    " netcfg/confirm_static=true",
-    "<enter><wait>",
-    "boot",
+    "/casper/vmlinuz ",
+    "root=/dev/sr0 ",
+    "initrd=/casper/initrd ",
+    "autoinstall ",
+    "ds=nocloud-net;s=http://{{.HTTPIP}}:{{.HTTPPort}}/",
     "<enter>"
   ]
   ip_wait_timeout  = var.vm--ip_wait_timeout

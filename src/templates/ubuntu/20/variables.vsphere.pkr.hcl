@@ -54,9 +54,3 @@ variable "vc--network" {
   description = "(Optional) The name of the target vSphere network segment. If not specified, the first network segment found is used."
   default     = null
 }
-
-variable "vc--folder" {
-  type        = string
-  description = "(Optional) The path of the target VM(s) to install. If not specified, use root of the datastore."
-  default     = null
-}
