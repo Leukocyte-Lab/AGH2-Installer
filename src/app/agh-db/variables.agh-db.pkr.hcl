@@ -33,9 +33,5 @@ vm--iso_urls           = [
 vm--iso_checksum_type  = "sha256"
 vm--iso_checksum_value = "f8e3086f3cea0fb3fefb29937ab5ed9d19e767079633960ccb50e76153effc98"
 
-// SSH Settings
-auth--ssh_port    = 22
-auth--ssh_timeout = "30m"
-
 // Provisioner Settings
 scripts = []
