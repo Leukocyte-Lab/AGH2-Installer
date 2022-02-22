@@ -15,7 +15,7 @@ variable "vm--gateway" {
 }
 
 variable "vm--nameservers" {
-  type        = list(string)
+  type        = string
   description = "The nameservers of VM."
 }
 
