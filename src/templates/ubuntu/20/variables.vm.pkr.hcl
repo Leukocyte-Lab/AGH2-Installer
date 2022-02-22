@@ -4,6 +4,21 @@ variable "vm--hostname" {
   description = "The hostname of VM."
 }
 
+variable "vm--ip" {
+  type        = string
+  description = "The ip of VM."
+}
+
+variable "vm--gateway" {
+  type        = string
+  description = "The gateway of VM."
+}
+
+variable "vm--nameservers" {
+  type        = list(string)
+  description = "The nameservers of VM."
+}
+
 variable "vm--name" {
   type        = string
   description = "The name of VM."

@@ -56,6 +56,9 @@ source "vsphere-iso" "ubuntu-server" {
     "/user-data"          = templatefile("data/ubuntu-server-cloud-init.pkrtpl.hcl", {
       hostname            = var.vm--hostname
       username            = var.auth--username
+      ip                  = var.vm--ip
+      gateway             = var.vm--gateway
+      nameservers         = var.vm--nameservers
       password_encrypted  = var.auth--password_encrypted
       language            = var.vm--language
       keyboard            = var.vm--keyboard
@@ -67,7 +70,7 @@ source "vsphere-iso" "ubuntu-server" {
   boot_wait  = var.vm--boot_wait
   boot_command = [
     "<esc><wait>",
-    "linux /casper/vmlinuz --- autoinstall ds=\"nocloud-net;seedfrom=http://{{.HTTPIP}}:{{.HTTPPort}}/\"",
+    "linux /casper/vmlinuz --- autoinstall seedfrom=http://{{.HTTPIP}}:{{.HTTPPort}}/",
     "<enter><wait>",
     "initrd /casper/initrd",
     "<enter><wait>",
