@@ -59,5 +59,4 @@ autoinstall:
   late-commands:
     - echo '${username} ALL=(ALL) NOPASSWD:ALL' > /target/etc/sudoers.d/${username}
     - curtin in-target --target=/target -- chmod 440 /etc/sudoers.d/${username}
-    - sed -i 's/^#*\(send dhcp-client-identifier\).*$/\1 = hardware;/' /target/etc/dhcp/dhclient.conf
   timezone: ${timezone}

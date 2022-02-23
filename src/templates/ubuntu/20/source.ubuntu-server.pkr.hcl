@@ -72,6 +72,8 @@ source "vsphere-iso" "ubuntu-server" {
     "<enter><wait>",
     "linux /casper/vmlinuz quiet ",
     "autoinstall ",
+    "ip=${split("/", var.vm--ip)[0]}::${var.vm--gateway}:${cidrnetmask(var.vm--ip)}:${var.vm--hostname}:: ",
+    "nameserver=${var.vm--nameserver} ",
     "ds=\"nocloud-net;s=http://{{.HTTPIP}}:{{.HTTPPort}}/\" ---",
     "<enter><wait>",
     "initrd /casper/initrd",
@@ -84,10 +86,10 @@ source "vsphere-iso" "ubuntu-server" {
   shutdown_timeout = var.vm--shutdown_timeout
 
   // Communicator Settings and Credentials
-  communicator           = "ssh"
-  ssh_handshake_attempts = 20
-  ssh_username           = var.auth--username
-  ssh_password           = var.auth--password
-  ssh_port               = var.auth--ssh_port
-  ssh_timeout            = var.auth--ssh_timeout
+  communicator            = "ssh"
+  ssh_handshake_attempts  = 20
+  ssh_username            = var.auth--username
+  ssh_password            = var.auth--password
+  ssh_port                = var.auth--ssh_port
+  ssh_timeout             = var.auth--ssh_timeout
 }
