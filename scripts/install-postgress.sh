@@ -1,4 +1,5 @@
-apt install -y software-properties-common
+#!/bin/bash
+
 add-apt-repository -y universe
 add-apt-repository -y ppa:groonga/ppa
 
@@ -8,4 +9,5 @@ apt install -y -V ./groonga-apt-source-latest-$(lsb_release --codename --short).
 echo "deb http://apt.postgresql.org/pub/repos/apt/ $(lsb_release --codename --short)-pgdg main" | tee /etc/apt/sources.list.d/pgdg.list
 wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
 
-apt update && apt install -y -V postgresql-13-pgdg-pgroonga
+apt update
+apt install -y -V postgresql-13-pgdg-pgroonga
