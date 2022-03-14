@@ -1,0 +1,7 @@
+// SSH Settings
+auth--ssh_port           = 22
+auth--ssh_timeout        = "30m"
+
+// Authentication
+auth--username           = "db-user"
+auth--password           = "password"
