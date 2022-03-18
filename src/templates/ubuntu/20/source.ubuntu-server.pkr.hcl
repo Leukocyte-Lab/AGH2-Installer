@@ -2,7 +2,7 @@ locals {
   buildtime = formatdate("YYYY-MM-DD hh:mm ZZZ", timestamp())
 }
 
-source "vsphere-iso" "ubuntu-server" {
+source "vmawre-iso" "ubuntu-server" {
 
   // vCenter Server Endpoint Settings and Credentials
   vcenter_server      = var.vc--endpoint

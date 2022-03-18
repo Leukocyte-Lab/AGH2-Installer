@@ -1,5 +1,5 @@
 build {
-  sources = ["source.vsphere-iso.ubuntu-server"]
+  sources = ["source.vmware-iso.ubuntu-server"]
 
   provisioner "shell" {
     execute_command = "echo '${var.auth--password}' | {{.Vars}} sudo -E -S sh -eux '{{.Path}}'"
