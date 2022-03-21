@@ -1,5 +1,6 @@
 
 check=false
+# wait for gorm auto migrate 
 until [ "$check" = "true" ]; do
     sudo -u postgres psql -c '\x' -c 'SELECT * FROM attack_groups;' -d capt-db && \
     sudo -u postgres psql -c '\x' -c 'SELECT * FROM attack_mitigations;' -d capt-db && \

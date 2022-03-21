@@ -1,6 +1,7 @@
 db_role=agh
 db_role_passWord=h7MzJyA8ULai
 
+# 執行SQL建立ROLE及DATABASE
 cat << EOF | sudo -u postgres psql -f -
 CREATE ROLE $db_role WITH
   LOGIN
