@@ -11,4 +11,8 @@ build {
     scripts = var.vm--init-scripts
     expect_disconnect = true
   }
+  provisioner "file" {
+    source = "./artifacts/json/IAMpolicyReadonly.json"
+    destination = "/tmp/IAMpolicyReadonly.json"
+  }
 }

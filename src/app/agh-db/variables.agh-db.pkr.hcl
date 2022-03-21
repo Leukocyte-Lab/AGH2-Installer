@@ -27,7 +27,9 @@ vm--network_card          = "vmxnet3"
 
 // Provisioner Settings
 vm--init-scripts = [
-  "./scripts/install-postgress.sh",
-  "./scripts/setup-firewall.sh",
-  "./scripts/setup-postgress.sh"
+  "./scripts/agh-db/db/01_installDB.sh",
+  "./scripts/agh-db/db/02_setUfw.sh",
+  "./scripts/agh-db/db/03_setPostgres.sh",
+  "./scripts/agh-db/db/04_import_db_role.sh",
+  "./scripts/agh-db/db/05_import_attack.sh",
 ]
