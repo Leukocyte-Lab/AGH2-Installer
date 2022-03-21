@@ -1,3 +1,5 @@
+#!/bin/bash
+
 minio_root_user=minio
 minio_root_password=vW6QxRtPtVzs
 
@@ -13,7 +15,7 @@ chmod +x mc
 ./mc alias set myminio http://localhost:9000 $minio_root_user $minio_root_password
 # 修改readonly的權限內容
 ./mc admin policy remove myminio/ readonly
-./mc admin policy add myminio/ readonly /tmp/IAMpolicyReadonly.json
+./mc admin policy add myminio/ readonly minio/IAMpolicyReadonly.json
 # 新增使用者capt-minio-user
 ./mc admin user add myminio/ $minio_capt_user $minio_capt_password
 # 新增使用者core-minio-user

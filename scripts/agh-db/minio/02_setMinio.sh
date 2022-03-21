@@ -1,3 +1,5 @@
+#!/bin/bash
+
 minio_root_user=minio
 minio_root_password=vW6QxRtPtVzs
 

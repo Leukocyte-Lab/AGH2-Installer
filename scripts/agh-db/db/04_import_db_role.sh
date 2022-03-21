@@ -1,3 +1,5 @@
+#!/bin/bash
+
 db_role=agh
 db_role_passWord=h7MzJyA8ULai
 

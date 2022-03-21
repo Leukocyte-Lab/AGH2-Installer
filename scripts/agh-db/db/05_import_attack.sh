@@ -1,3 +1,4 @@
+#!/bin/bash
 
 check=false
 # wait for gorm auto migrate 

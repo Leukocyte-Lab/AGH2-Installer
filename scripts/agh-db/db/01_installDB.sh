@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # 安裝 software-properties-common，功能為PPA (Personal Package Archive) 管理工具​
 sudo apt install -y software-properties-common
 sudo add-apt-repository -y universe
