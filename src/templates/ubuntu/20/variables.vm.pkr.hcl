@@ -16,6 +16,7 @@ variable "vm" {
     network     = object({
       adapter     = string
       hostname    = string
+      name        = string
       ip          = string
       netmask     = string
       gateway     = string
