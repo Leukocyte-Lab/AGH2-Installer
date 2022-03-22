@@ -32,17 +32,27 @@ source "vmware-iso" "ubuntu-server" {
 
   // Network Settings
   network_adapter_type              = var.vm.network.adapter
+  network_name                      = var.vm.network.name
 
   // ISO Settings
   cdrom_adapter_type                = var.vm.instance.cdrom_type
 
   // Removable Media Settings
-  iso_checksum = "${var.vm.iso.hash}:${var.vm.iso.checksum}"
-  iso_urls     = var.vm.iso.urls
+  iso_checksum                      = "${var.vm.iso.hash}:${var.vm.iso.checksum}"
+  iso_urls                          = var.vm.iso.urls
+  tools_upload_flavor               = "linux"
 
   // VMX
   vmx_data = {
     firmware = "efi"
+    "hpet0.present" = "TRUE"
+    "ich7m.present" = "TRUE"
+    "smc.present" = "TRUE"
+    "usb.present" = "TRUE"
+    "bios.bootOrder" = "cdrom,disk"
+    "ethernet0.bsdname" = "ens192"
+    "ethernet0.pcislotnumber" = "192"
+    "ethernet0.wakeonpcktrcv" = "TRUE"
   }
 
   // Boot and Provisioning Settings
@@ -63,7 +73,7 @@ source "vmware-iso" "ubuntu-server" {
     })
   }
 
-  boot_wait               = "10s"
+  boot_wait               = "2s"
   boot_command = [
     "<esc><esc><esc><wait>",
     "<enter><wait>",
