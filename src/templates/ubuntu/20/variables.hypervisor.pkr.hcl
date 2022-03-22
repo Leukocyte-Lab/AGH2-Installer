@@ -1,0 +1,1 @@
+../../general/variables.hypervisor.pkr.hcl

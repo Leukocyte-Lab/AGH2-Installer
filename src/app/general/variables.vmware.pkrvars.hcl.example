@@ -1,0 +1,10 @@
+// Hypervisor
+hypervisor = {
+  host        = "esxi.local"
+  port        = 22
+  username    = "user"
+  password    = "password"
+  type        = "esx5"
+  datastore   = "datastore1"
+  insecure    = true
+}
