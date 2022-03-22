@@ -2,78 +2,75 @@ locals {
   buildtime = formatdate("YYYY-MM-DD hh:mm ZZZ", timestamp())
 }
 
-source "vmawre-iso" "ubuntu-server" {
+source "vmware-iso" "ubuntu-server" {
 
-  // vCenter Server Endpoint Settings and Credentials
-  vcenter_server      = var.vc--endpoint
-  username            = var.vc--username
-  password            = var.vc--password
-  insecure_connection = var.vc--insecure_connection
+  // Hypervisor Connection
+  remote_type                       = var.hypervisor.type
+  remote_host                       = var.hypervisor.host
+  remote_username                   = var.hypervisor.username
+  remote_password                   = var.hypervisor.password
+  skip_validate_credentials         = var.hypervisor.insecure
+  insecure_connection               = var.hypervisor.insecure
 
-  // vSphere Settings
-  datacenter = var.vc--datacenter
-  host       = var.vc--host
-  cluster    = var.vc--cluster
-  datastore  = var.vc--datastore
+  // Hypervisor Provision
+  vnc_disable_password              = true
+  vnc_over_websocket                = true
 
   // Virtual Machine Settings
-  guest_os_type        = var.vm--os_type
-  vm_name              = var.vm--name
-  firmware             = var.vm--firmware
-  CPUs                 = var.vm--cpu_sockets
-  cpu_cores            = var.vm--cpu_cores
-  CPU_hot_plug         = var.vm--cpu_hot_add
-  RAM                  = var.vm--mem_size
-  RAM_hot_plug         = var.vm--mem_hot_add
-  cdrom_type           = var.vm--cdrom_type
-  disk_controller_type = var.vm--disk_controller_type
+  remote_datastore                  = var.hypervisor.datastore
+  vm_name                           = var.vm.name
+  guest_os_type                     = var.vm.hw.type
+  cpus                              = var.vm.hw.cpus
+  memory                            = var.vm.hw.mem
+  version                           = var.vm.hw.version
 
-  storage {
-    disk_size             = var.vm--disk_size
-    disk_thin_provisioned = var.vm--disk_thin_provisioned
-  }
+  // Disk Settings
+  disk_adapter_type                 = var.vm.disk.adapter
+  disk_type_id                      = var.vm.disk.type
+  disk_size                         = var.vm.disk.size
+  skip_compaction                   = var.vm.disk.type == 0 ? true : false
 
-  network_adapters {
-    network      = var.vc--network
-    network_card = var.vm--network_card
-  }
+  // Network Settings
+  network_adapter_type              = var.vm.network.adapter
 
-  vm_version           = var.vm--version
-  remove_cdrom         = var.vm--remove_cdrom
-  tools_upgrade_policy = var.vm--tools_upgrade_policy
-  notes                = "Built by HashiCorp Packer on ${local.buildtime}."
+  // ISO Settings
+  cdrom_adapter_type                = var.vm.instance.cdrom_type
 
   // Removable Media Settings
-  iso_checksum = "${var.vm--iso_hash}:${var.vm--iso_checksum}"
-  iso_urls     = var.vm--iso_urls
+  iso_checksum = "${var.vm.iso.hash}:${var.vm.iso.checksum}"
+  iso_urls     = var.vm.iso.urls
+
+  // VMX
+  vmx_data = {
+    firmware = "efi"
+  }
 
   // Boot and Provisioning Settings
-  http_port_min = var.vm--http_port_min
-  http_port_max = var.vm--http_port_max
+  http_port_min = var.vm.instance.http_port.min
+  http_port_max = var.vm.instance.http_port.max
   http_content = {
     "/meta-data"          = file("data/meta-data")
     "/user-data"          = templatefile("data/ubuntu-server-cloud-init.yaml", {
-      hostname            = var.vm--hostname
-      username            = var.auth--username
-      password_encrypted  = var.auth--password_encrypted
-      ip                  = var.vm--ip
-      gateway             = var.vm--gateway
-      nameserver          = var.vm--nameserver
-      language            = var.vm--language
-      keyboard            = var.vm--keyboard
-      timezone            = var.vm--timezone
-      ssh_key             = var.auth--ssh_key
+      hostname            = var.vm.network.hostname
+      username            = var.vm.auth.username
+      password_encrypted  = var.vm.auth.password_encrypted
+      ip                  = var.vm.network.ip
+      gateway             = var.vm.network.gateway
+      nameserver          = var.vm.network.nameserver
+      language            = var.vm.instance.language
+      keyboard            = var.vm.instance.keyboard
+      timezone            = var.vm.instance.timezone
     })
   }
-  boot_order = var.vm--boot_order
-  boot_wait  = var.vm--boot_wait
+
+  boot_wait               = "10s"
   boot_command = [
     "<esc><esc><esc><wait>",
     "<enter><wait>",
     "linux /casper/vmlinuz quiet ",
     "autoinstall ",
-    "ip=${split("/", var.vm--ip)[0]}::${var.vm--gateway}:${cidrnetmask(var.vm--ip)}:${var.vm--hostname}:: ",
-    "nameserver=${var.vm--nameserver} ",
+    "ip=${split("/", var.vm.network.ip)[0]}::${var.vm.network.gateway}:${cidrnetmask(var.vm.network.ip)}:${var.vm.network.hostname}:: ",
+    "nameserver=${var.vm.network.nameserver} ",
     "ds=\"nocloud-net;s=http://{{.HTTPIP}}:{{.HTTPPort}}/\" ---",
     "<enter><wait>",
     "initrd /casper/initrd",
@@ -81,15 +78,18 @@ source "vmawre-iso" "ubuntu-server" {
     "boot",
     "<enter>"
   ]
-  ip_wait_timeout  = var.vm--ip_wait_timeout
-  shutdown_command = "echo '${var.auth--password}' | sudo -S -E shutdown -P now"
-  shutdown_timeout = var.vm--shutdown_timeout
+
+  shutdown_command = "echo '${var.vm.auth.password}' | sudo -S -E shutdown -P now"
+  shutdown_timeout = var.vm.provision.shutdown_timeout
 
   // Communicator Settings and Credentials
   communicator            = "ssh"
   ssh_handshake_attempts  = 20
-  ssh_username            = var.auth--username
-  ssh_password            = var.auth--password
-  ssh_port                = var.auth--ssh_port
-  ssh_timeout             = var.auth--ssh_timeout
+  ssh_username            = var.vm.auth.username
+  ssh_password            = var.vm.auth.password
+  ssh_port                = var.vm.auth.ssh_port
+  ssh_timeout             = var.vm.auth.ssh_timeout
+
+  skip_export             = true
+  keep_registered         = true
 }
