@@ -5,6 +5,7 @@
   ],
   "files.associations": {
     "*.pkrvars.hcl": "packervars",
+    "*.pkrvars.hcl.example": "packervars",
     "variables.*.pkr.hcl": "packervars",
     "*.hcl": "hcl"
   }
