@@ -99,6 +99,7 @@ source "vmware-iso" "ubuntu-server" {
   ssh_password            = var.vm.auth.password
   ssh_port                = var.vm.auth.ssh_port
   ssh_timeout             = var.vm.auth.ssh_timeout
+  pause_before_connecting = "1m"
 
   skip_export             = true
   keep_registered         = true
