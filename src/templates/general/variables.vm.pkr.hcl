@@ -50,6 +50,8 @@ variable "vm" {
       ip_wait_timeout    = string
       shutdown_timeout   = string
       scripts            = list(string)
+      files              = list(string)
+      env                = list(string)
     })
   })
 }
