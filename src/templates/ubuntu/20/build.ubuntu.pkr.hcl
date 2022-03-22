@@ -7,7 +7,7 @@ build {
   }
 
   provisioner "shell" {
-    execute_command = "echo '${var.vm.auth.password}' | {{.Vars}} sudo -E -S sh -eux '{{.Path}}'"
+    execute_command = "echo '${var.vm.auth.password}' | {{.Vars}} sudo -E -S /bin/bash -eux '{{.Path}}'"
     environment_vars = concat([
       "USERNAME=${var.vm.auth.username}",
       "IP=${var.vm.network.ip}"
