@@ -2,5 +2,10 @@
   "recommendations": [
     "wholroyd.hcl",
     "4ops.packer"
-  ]
+  ],
+  "files.associations": {
+    "*.pkrvars.hcl": "packervars",
+    "variables.*.pkr.hcl": "packervars",
+    "*.hcl": "hcl"
+  }
 }
