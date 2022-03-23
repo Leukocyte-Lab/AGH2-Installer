@@ -13,7 +13,7 @@ vm = {
   }
   network     = {
     adapter     = "vmxnet3"
-    name        = "Lab VM Network"
+    name        = "VM Network"
     hostname    = "agh-k3s-master"
     ip          = "10.120.2.1/16"
     netmask     = "10.120.0.1"
@@ -51,8 +51,29 @@ vm = {
   provision     = {
     ip_wait_timeout    = "20m"
     shutdown_timeout   = "15m"
-    scripts = [
-      "./scripts/install-k3s.sh",
+    scripts            = [
+      "./scripts/cluster/00-install-k3s.sh",
+      "./scripts/cluster/01-setup-k3s.sh",
+      "./scripts/cluster/02-generate-deployment.sh",
+      "./scripts/cluster/03-install-helm.sh",
+      "./scripts/cluster/04-install-agh.sh",
+    ]
+    seeding            = []
+    files              = []
+    env                = [
+      "K3S_VERSION=v1.21.10+k3s1",
+      "JWT_SECRET=something_random",
+      "KEYGEN_API_TOKEN=",
+      "KEYGEN_ACCOUNT_ID=",
+      "DB_IP=10.120.2.2",
+      "DB_USER=agh",
+      "DB_PASSWORD=password",
+      "MINIO_CORE_USER=core-minio-user",
+      "MINIO_CORE_PASSWORD=core-minio-password",
+      "MINIO_CAPT_USER=capt-minio-user",
+      "MINIO_CAPT_PASSWORD=capt-minio-password",
+      "IMAGE_CREDENTIAL_USER=image-credential-user",
+      "IMAGE_CREDENTIAL_PASSWORD=image-credential-password",
     ]
   }
 }

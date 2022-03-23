@@ -13,7 +13,7 @@ vm = {
   }
   network     = {
     adapter     = "vmxnet3"
-    name        = "Lab VM Network"
+    name        = "VM Network"
     hostname    = "agh-db"
     ip          = "10.120.2.2/16"
     netmask     = "10.120.0.1"
@@ -51,8 +51,31 @@ vm = {
   provision     = {
     ip_wait_timeout    = "20m"
     shutdown_timeout   = "15m"
-    scripts = [
-      "./scripts/install-postgress.sh",
+    scripts            = [
+      "./scripts/db/00-install-postgress.sh",
+      "./scripts/db/01-setup-postgress.sh",
+      "./scripts/db/02-setup-firewall.sh",
+      "./scripts/db/03-setup-databases.sh",
+      "./scripts/minio/00-install-minio.sh",
+      "./scripts/minio/01-setup-minio.sh",
+      "./scripts/minio/02-setup-minio-policy.sh",
+    ]
+    seeding            = [
+      "./scripts/db/04-seed-databases.sh",
+    ]
+    files              = [
+      "./artifacts/db/attack.sql",
+      "./artifacts/json/IAMpolicy.json",
+    ]
+    env                = [
+      "MINIO_ROOT_USER=minio",
+      "MINIO_ROOT_PASSWORD=minio-password",
+      "DB_USER=agh",
+      "DB_PASSWORD=password",
+      "MINIO_CORE_USER=core-minio-user",
+      "MINIO_CORE_PASSWORD=core-minio-password",
+      "MINIO_CAPT_USER=capt-minio-user",
+      "MINIO_CAPT_PASSWORD=capt-minio-password",
     ]
   }
 }
