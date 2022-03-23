@@ -76,3 +76,11 @@ https://github.com/Leukocyte-Lab/AGH2-Installer/blob/f5e5f35467fe117fdc849a5c768
 > If you have `Docker` on your system, it can be an alternative methods by running `docker run --rm -ti alpine:latest mkpasswd -m sha512 -S 4096`
 4. Env - Modify the config for setup AGH-DB enviroments
 https://github.com/Leukocyte-Lab/AGH2-Installer/blob/f5e5f35467fe117fdc849a5c768fabbf0ad3b3f7/src/app/agh-k3s/variables.agh-k3s.pkrvars.hcl.example#L65-L76
+
+## Installation
+
+Run following script in your shell to install _ArgusHack_
+
+```sh
+make install
+```
