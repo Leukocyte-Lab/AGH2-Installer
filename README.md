@@ -104,3 +104,22 @@ Run the following script in your shell to install _ArgusHack_
 ```sh
 make install
 ```
+
+## Troubleshooting
+
+### General
+
+If a stage runs out with error like following results, you can press `r` then `Return` to let installer _**auto-retry**_ that step, or `c` to _**clean up**_, exit and try again.
+
+If you still can't solve the problem, use `a` to abort the installation, and please contact us to take support. **ONLY** use `a` if you are sure that the problem is not caused by your configuration.
+
+```log
+==> vmware-iso.ubuntu-server: Step "StepCreateDisks" failed
+==> vmware-iso.ubuntu-server: [c] Clean up and exit, [a] abort without cleanup, or [r] retry step (build may fail even if retry succeeds)?
+```
+
+### Stuck on `null.vmware-preprocess: Waiting for SSH to become available...`
+
+Make sure you have `SSH` enabled on your Hypervisor, and all the variables configured in `src/app/general/variables.vmware.pkrvars.hcl` are correct.
+
+You can also try directly access the Hypervisor with `ssh root@<Hypervisor IP>` to figure out the problem.
