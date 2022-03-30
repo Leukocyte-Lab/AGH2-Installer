@@ -77,7 +77,7 @@ vm = {
       "IMAGE_CREDENTIAL_PASSWORD=image-credential-password",
       "RANCHER_VERSION=2.3.6",
       "RANCHER_ROOT_PASSWORD=admin",
-      "RANCHER_DOMAIN=rancher.my.org",
+      "RANCHER_DOMAIN=rancher.argushack.com",
     ]
   }
 }
