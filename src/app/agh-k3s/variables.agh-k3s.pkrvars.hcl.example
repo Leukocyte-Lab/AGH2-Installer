@@ -75,7 +75,7 @@ vm = {
       "MINIO_CAPT_PASSWORD=capt-minio-password",
       "IMAGE_CREDENTIAL_USER=image-credential-user",
       "IMAGE_CREDENTIAL_PASSWORD=image-credential-password",
-      "RANCHER_VERSION=2.3.6",
+      "RANCHER_VERSION=2.6.3",
       "RANCHER_ROOT_PASSWORD=admin",
       "RANCHER_DOMAIN=rancher.argushack.com",
     ]
