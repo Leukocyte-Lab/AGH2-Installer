@@ -2,7 +2,7 @@
 
 TARGET_FILE=/tmp/deployment.yaml
 
-declare -a SERVICES=("captain" "core" "exploitmgr" "template")
+declare -a SERVICES=("captain" "core" "exploitmgr" "template" "attack")
 
 # Clear
 echo "" > $TARGET_FILE
