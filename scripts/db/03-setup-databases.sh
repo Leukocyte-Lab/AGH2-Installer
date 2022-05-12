@@ -45,4 +45,13 @@ CREATE DATABASE "template-db" WITH
 \c template-db
 CREATE EXTENSION IF NOT EXISTS pgroonga;
 GRANT USAGE ON SCHEMA pgroonga TO $DB_USER;
+
+-- Create attack DB
+CREATE DATABASE "attack-db" WITH 
+  OWNER = $DB_USER
+  ENCODING = 'UTF8'
+  CONNECTION LIMIT = -1;
+\c attack-db
+CREATE EXTENSION IF NOT EXISTS pgroonga;
+GRANT USAGE ON SCHEMA pgroonga TO $DB_USER;
 EOF
