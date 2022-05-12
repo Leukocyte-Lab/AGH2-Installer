@@ -65,6 +65,9 @@ vm = {
     ]
     files              = [
       "./artifacts/db/attack.sql",
+      "./artifacts/db/ATTACK-mitre_groups.sql",
+      "./artifacts/db/ATTACK-os.sql",
+      "./artifacts/db/ATTACK-mitre_techniques.sql",
       "./artifacts/json/IAMpolicy.json",
     ]
     env                = [
