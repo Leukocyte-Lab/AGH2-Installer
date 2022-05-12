@@ -14,3 +14,6 @@ until [ "$CHECK" = "true" ]; do
 done
 
 runuser -u postgres -- psql captain-db < /tmp/attack.sql
+runuser -u postgres -- psql attack-db < /tmp/ATTACK-mitre_groups.sql
+runuser -u postgres -- psql attack-db < /tmp/ATTACK-os.sql
+runuser -u postgres -- psql attack-db < /tmp/ATTACK-mitre_techniques.sql
