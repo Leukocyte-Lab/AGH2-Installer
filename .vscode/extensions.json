@@ -1,7 +1,7 @@
 {
   "recommendations": [
-    "wholroyd.hcl",
-    "4ops.packer"
+    "4ops.packer",
+    "wholroyd.HCL"
   ],
   "files.associations": {
     "*.pkrvars.hcl": "packervars",
