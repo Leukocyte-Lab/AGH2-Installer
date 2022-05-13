@@ -16,7 +16,7 @@ vm = {
     name        = "VM Network"
     hostname    = "agh-db"
     ip          = "10.120.2.2/16"
-    netmask     = "10.120.0.1"
+    netmask     = "255.255.0.0"
     gateway     = "10.120.0.1"
     nameserver  = "10.120.0.1"
   }
