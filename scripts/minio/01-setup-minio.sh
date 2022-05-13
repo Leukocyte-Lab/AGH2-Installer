@@ -14,7 +14,7 @@ EOF
 # Create minio-user
 useradd minio-user
 # Create Mount Point
-mkdir /mnt/data
+mkdir -p /mnt/data
 # Grant Permission
 chown -R minio-user /mnt/data && chmod u+rxw /mnt/data
 # Start Service
