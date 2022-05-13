@@ -16,7 +16,7 @@ vm = {
     name        = "VM Network"
     hostname    = "agh-db"
     ip          = "10.120.2.2/16"
-    netmask     = "10.120.0.1"
+    netmask     = "255.255.0.0"
     gateway     = "10.120.0.1"
     nameserver  = "10.120.0.1"
   }
@@ -65,6 +65,9 @@ vm = {
     ]
     files              = [
       "./artifacts/db/attack.sql",
+      "./artifacts/db/ATTACK-mitre_groups.sql",
+      "./artifacts/db/ATTACK-os.sql",
+      "./artifacts/db/ATTACK-mitre_techniques.sql",
       "./artifacts/json/IAMpolicy.json",
     ]
     env                = [

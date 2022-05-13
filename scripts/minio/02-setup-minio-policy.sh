@@ -1,6 +1,6 @@
 #!/bin/bash
 
-wget -o-  https://dl.min.io/client/mc/release/linux-amd64/mc
+wget https://dl.min.io/client/mc/release/linux-amd64/mc
 chmod +x mc
 
 ./mc alias set agh-minio http://localhost:9000 $MINIO_ROOT_USER $MINIO_ROOT_PASSWORD
