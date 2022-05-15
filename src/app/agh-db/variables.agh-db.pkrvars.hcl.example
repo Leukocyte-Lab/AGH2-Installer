@@ -4,7 +4,7 @@ vm = {
     type        = "ubuntu-64"
     cpus        = 8
     mem         = 16384
-    version     = "19"
+    version     = "17"
   }
   disk        = {
     adapter     = "scsi"
