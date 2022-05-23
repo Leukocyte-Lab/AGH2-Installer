@@ -1,5 +1,8 @@
 #!/bin/bash
 
+cp /tmp/sources.list /etc/apt/sources.list
+apt update
+
 add-apt-repository -y universe && \
 add-apt-repository -y ppa:groonga/ppa
 
