@@ -59,7 +59,9 @@ vm = {
       "./scripts/cluster/04-install-agh.sh",
     ]
     seeding            = []
-    files              = []
+    files              = [
+      "./artifacts/config/sources.list",
+    ]
     env                = [
       "K3S_VERSION=v1.21.10+k3s1",
       "JWT_SECRET=something_random",

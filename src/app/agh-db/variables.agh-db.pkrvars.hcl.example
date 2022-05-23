@@ -69,6 +69,7 @@ vm = {
       "./artifacts/db/ATTACK-os.sql",
       "./artifacts/db/ATTACK-mitre_techniques.sql",
       "./artifacts/json/IAMpolicy.json",
+      "./artifacts/config/sources.list",
     ]
     env                = [
       "MINIO_ROOT_USER=minio",
