@@ -1,33 +1,14 @@
-deb http://ftp.tku.edu.tw/ubuntu/ focal main restricted
-deb http://ftp.tku.edu.tw/ubuntu/ focal-updates main restricted
-deb http://ftp.tku.edu.tw/ubuntu/ focal universe
-deb http://ftp.tku.edu.tw/ubuntu/ focal-updates universe
-deb http://ftp.tku.edu.tw/ubuntu/ focal multiverse
-deb http://ftp.tku.edu.tw/ubuntu/ focal-updates multiverse
-deb http://ftp.tku.edu.tw/ubuntu/ focal-backports main restricted universe multiverse
-deb http://ftp.tku.edu.tw/ubuntu/ focal-security main restricted
-deb http://ftp.tku.edu.tw/ubuntu/ focal-security universe
-deb http://ftp.tku.edu.tw/ubuntu/ focal-security multiverse
-deb http://mirror01.idc.hinet.net/ubuntu/ focal main restricted
-deb http://mirror01.idc.hinet.net/ubuntu/ focal-updates main restricted
-deb http://mirror01.idc.hinet.net/ubuntu/ focal universe
-deb http://mirror01.idc.hinet.net/ubuntu/ focal-updates universe
-deb http://mirror01.idc.hinet.net/ubuntu/ focal multiverse
-deb http://mirror01.idc.hinet.net/ubuntu/ focal-updates multiverse
-deb http://mirror01.idc.hinet.net/ubuntu/ focal-backports main restricted universe multiverse
-deb http://mirror01.idc.hinet.net/ubuntu/ focal-security main restricted
-deb http://mirror01.idc.hinet.net/ubuntu/ focal-security universe
-deb http://mirror01.idc.hinet.net/ubuntu/ focal-security multiverse
-deb https://tw1.mirror.blendbyte.net/ubuntu/ focal main restricted
-deb https://tw1.mirror.blendbyte.net/ubuntu/ focal-updates main restricted
-deb https://tw1.mirror.blendbyte.net/ubuntu/ focal universe
-deb https://tw1.mirror.blendbyte.net/ubuntu/ focal-updates universe
-deb https://tw1.mirror.blendbyte.net/ubuntu/ focal multiverse
-deb https://tw1.mirror.blendbyte.net/ubuntu/ focal-updates multiverse
-deb https://tw1.mirror.blendbyte.net/ubuntu/ focal-backports main restricted universe multiverse
-deb https://tw1.mirror.blendbyte.net/ubuntu/ focal-security main restricted
-deb https://tw1.mirror.blendbyte.net/ubuntu/ focal-security universe
-deb https://tw1.mirror.blendbyte.net/ubuntu/ focal-security multiverse
+deb http://free.nchc.org.tw/ubuntu/ focal main restricted
+deb http://free.nchc.org.tw/ubuntu/ focal-updates main restricted
+deb http://free.nchc.org.tw/ubuntu/ focal universe
+deb http://free.nchc.org.tw/ubuntu/ focal-updates universe
+deb http://free.nchc.org.tw/ubuntu/ focal multiverse
+deb http://free.nchc.org.tw/ubuntu/ focal-updates multiverse
+deb http://free.nchc.org.tw/ubuntu/ focal-backports main restricted universe multiverse
+deb http://free.nchc.org.tw/ubuntu/ focal-security main restricted
+deb http://free.nchc.org.tw/ubuntu/ focal-security universe
+deb http://free.nchc.org.tw/ubuntu/ focal-security multiverse
+
 deb http://tw.archive.ubuntu.com/ubuntu focal main restricted
 deb http://tw.archive.ubuntu.com/ubuntu focal-updates main restricted
 deb http://tw.archive.ubuntu.com/ubuntu focal universe
@@ -38,3 +19,14 @@ deb http://tw.archive.ubuntu.com/ubuntu focal-backports main restricted universe
 deb http://tw.archive.ubuntu.com/ubuntu focal-security main restricted
 deb http://tw.archive.ubuntu.com/ubuntu focal-security universe
 deb http://tw.archive.ubuntu.com/ubuntu focal-security multiverse
+
+deb http://archive.ubuntu.com/ubuntu/ focal main restricted
+deb http://archive.ubuntu.com/ubuntu/ focal-updates main restricted
+deb http://archive.ubuntu.com/ubuntu/ focal universe
+deb http://archive.ubuntu.com/ubuntu/ focal-updates universe
+deb http://archive.ubuntu.com/ubuntu/ focal multiverse
+deb http://archive.ubuntu.com/ubuntu/ focal-updates multiverse
+deb http://archive.ubuntu.com/ubuntu/ focal-backports main restricted universe multiverse
+deb http://archive.ubuntu.com/ubuntu/ focal-security main restricted
+deb http://archive.ubuntu.com/ubuntu/ focal-security universe
+deb http://archive.ubuntu.com/ubuntu/ focal-security multiverse
