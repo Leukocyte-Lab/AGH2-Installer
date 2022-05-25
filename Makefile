@@ -1,5 +1,5 @@
 .PHONY: install
-install: init-plugins pre-install install-vm sleep setup sleep seeding sleep check post-install
+install: init-plugins cleanup pre-install install-vm sleep setup sleep seeding sleep check post-install
 
 .PHONY: install-vm
 install-vm: install--agh-db boot--agh-db install--agh-k3s boot--agh-k3s
@@ -16,6 +16,12 @@ install-vm: check--agh-db check--agh-k3s
 .PHONY: init-plugins
 init-plugins:
 	packer init src/plugins
+
+.PHONY: cleanup
+cleanup:
+	packer build -force -on-error=ask \
+		-var-file=src/app/general/variables.vmware.pkrvars.hcl \
+		src/cleanup | tee logs/cleanup.log
 
 .PHONY: pre-install
 pre-install:
