@@ -75,8 +75,7 @@ source "vmware-iso" "ubuntu-server" {
 
   boot_wait               = "2s"
   boot_command = [
-    "<esc><esc><esc><wait>",
-    "<enter><wait>",
+    "c",
     "linux /casper/vmlinuz quiet ",
     "autoinstall ",
     "ip=${split("/", var.vm.network.ip)[0]}::${var.vm.network.gateway}:${cidrnetmask(var.vm.network.ip)}:${var.vm.network.hostname}:: ",
