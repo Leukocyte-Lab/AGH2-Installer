@@ -7,4 +7,9 @@ hypervisor = {
   type        = "esx5"
   datastore   = "datastore1"
   insecure    = true
+  provision   = {
+    cleanup     = [
+      "./scripts/cleanup/00-cleanup.sh"
+    ]
+  }
 }
