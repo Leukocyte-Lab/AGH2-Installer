@@ -51,7 +51,8 @@ vm = {
   provision     = {
     ip_wait_timeout    = "20m"
     shutdown_timeout   = "15m"
-    scripts            = [
+    scripts            = []
+    setup              = [
       "./scripts/db/00-install-postgress.sh",
       "./scripts/db/01-setup-postgress.sh",
       "./scripts/db/02-setup-firewall.sh",
@@ -63,6 +64,7 @@ vm = {
     seeding            = [
       "./scripts/db/04-seed-databases.sh",
     ]
+    check              = []
     files              = [
       "./artifacts/db/attack.sql",
       "./artifacts/db/ATTACK-mitre_groups.sql",

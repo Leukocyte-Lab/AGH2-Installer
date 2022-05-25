@@ -51,7 +51,8 @@ vm = {
   provision     = {
     ip_wait_timeout    = "20m"
     shutdown_timeout   = "15m"
-    scripts            = [
+    scripts            = []
+    setup              = [
       "./scripts/cluster/00-install-k3s.sh",
       "./scripts/cluster/01-setup-k3s.sh",
       "./scripts/cluster/02-generate-deployment.sh",
