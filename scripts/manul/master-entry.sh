@@ -1,9 +1,7 @@
 #!/bin/bash
 
 filename=/tmp/script/manul/env.sh
-while IFS='' read -r line || [[ -n "$line" ]]; do
-    eval $line
-done < $filename
+source $filename
 
 /tmp/script/cluster/00-install-k3s.sh
 /tmp/script/cluster/01-setup-k3s.sh

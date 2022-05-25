@@ -1,9 +1,7 @@
 #!/bin/bash
 
 filename=/tmp/script/manul/env.sh
-while IFS='' read -r line || [[ -n "$line" ]]; do
-    eval $line
-done < $filename
+source $filename
 
 /tmp/script/db/00-install-postgress.sh
 /tmp/script/db/01-setup-postgress.sh

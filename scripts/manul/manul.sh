@@ -4,10 +4,7 @@ sudo apt install sshpass
 
 SCRIPTPATH="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
 
-filename="$SCRIPTPATH"/env.sh
-while IFS='' read -r line || [[ -n "$line" ]]; do
-    eval $line
-done < $filename
+source "$SCRIPTPATH"/env.sh
 
 sshpass -p "$AGH_DB_PASSWORD" scp -o StrictHostKeyChecking=no "$SCRIPTPATH"/../../artifacts/db/ATTACK-mitre_groups.sql $AGH_DB_USER@$DB_IP:/tmp/
 sshpass -p "$AGH_DB_PASSWORD" scp "$SCRIPTPATH"/../../artifacts/db/ATTACK-mitre_techniques.sql $AGH_DB_USER@$DB_IP:/tmp/
