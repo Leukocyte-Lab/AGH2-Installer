@@ -9,6 +9,9 @@ until [ "$CHECK" = "true" ]; do
   runuser -u postgres -- psql -c '\x' -c 'SELECT * FROM attack_softwares;' -d captain-db && \
   runuser -u postgres -- psql -c '\x' -c 'SELECT * FROM pattern_childrens;' -d captain-db && \
   runuser -u postgres -- psql -c '\x' -c 'SELECT * FROM pattern_tactics;' -d captain-db && \
+  runuser -u postgres -- psql -c '\x' -c 'SELECT * FROM mitre_groups;' -d attack-db && \
+  runuser -u postgres -- psql -c '\x' -c 'SELECT * FROM os;' -d attack-db && \
+  runuser -u postgres -- psql -c '\x' -c 'SELECT * FROM mitre_techniques;' -d attack-db && \
   CHECK=true
   sleep 10
 done
