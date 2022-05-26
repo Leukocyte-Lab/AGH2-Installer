@@ -87,6 +87,7 @@ source "vmware-iso" "ubuntu-server" {
     "boot",
     "<enter>"
   ]
+  boot_key_interval       = "10ms"
 
   shutdown_command = "echo '${var.vm.auth.password}' | sudo -S -E systemctl poweroff"
   shutdown_timeout = var.vm.provision.shutdown_timeout
