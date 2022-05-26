@@ -1,5 +1,5 @@
 vm = {
-  name        = "AGH-K3S-Master"
+  name        = "ArgusHack-Server-M01"
   hw          = {
     type        = "ubuntu-64"
     cpus        = 8
@@ -14,7 +14,7 @@ vm = {
   network     = {
     adapter     = "vmxnet3"
     name        = "VM Network"
-    hostname    = "agh-k3s-master"
+    hostname    = "agh-server-m01"
     ip          = "10.120.2.1/16"
     netmask     = "255.255.0.0"
     gateway     = "10.120.0.1"

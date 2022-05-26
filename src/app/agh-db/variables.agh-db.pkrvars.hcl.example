@@ -1,5 +1,5 @@
 vm = {
-  name        = "AGH-DB"
+  name        = "ArgusHack-DB"
   hw          = {
     type        = "ubuntu-64"
     cpus        = 8
