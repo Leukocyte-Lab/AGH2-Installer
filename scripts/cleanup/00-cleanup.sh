@@ -18,7 +18,7 @@ vim-cmd vmsvc/getallvms
 sleep 1
 
 echo "Delete existed VM file in datastore..." && \
-rm -rf "/vmfs/volumes/$DATASTORE/AGH-*"
+rm -rf /vmfs/volumes/"$DATASTORE"/AGH-*
 
 sleep 1
 
