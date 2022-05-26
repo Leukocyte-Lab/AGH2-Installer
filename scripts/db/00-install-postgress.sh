@@ -3,7 +3,7 @@
 add-apt-repository -y universe && \
 add-apt-repository -y ppa:groonga/ppa && \
 apt update && \
-apt install -y wget lsb_release
+apt install -y wget lsb-release
 
 wget https://packages.groonga.org/ubuntu/groonga-apt-source-latest-$(lsb_release -cs).deb
 
