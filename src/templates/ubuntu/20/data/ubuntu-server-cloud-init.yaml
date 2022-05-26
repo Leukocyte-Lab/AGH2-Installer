@@ -3,7 +3,7 @@ autoinstall:
   version: 1
   apt:
     geoip: true
-    preserve_sources_list: true
+    preserve_sources_list: false
     primary:
       - arches: [default, amd64, aarch64, i386]
         uri: http://free.nchc.org.tw/ubuntu
