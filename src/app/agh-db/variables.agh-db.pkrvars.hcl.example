@@ -2,8 +2,8 @@ vm = {
   name        = "ArgusHack-DB"
   hw          = {
     type        = "ubuntu-64"
-    cpus        = 8
-    mem         = 16384
+    cpus        = 4
+    mem         = 8192
     version     = "17"
   }
   disk        = {
