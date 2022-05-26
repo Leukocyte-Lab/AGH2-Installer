@@ -88,7 +88,7 @@ source "vmware-iso" "ubuntu-server" {
     "<enter>"
   ]
 
-  shutdown_command = "echo '${var.vm.auth.password}' | sudo -S -E shutdown -P now"
+  shutdown_command = "echo '${var.vm.auth.password}' | sudo -S -E systemctl poweroff"
   shutdown_timeout = var.vm.provision.shutdown_timeout
 
   // Communicator Settings and Credentials
@@ -98,7 +98,7 @@ source "vmware-iso" "ubuntu-server" {
   ssh_password            = var.vm.auth.password
   ssh_port                = var.vm.auth.ssh_port
   ssh_timeout             = var.vm.auth.ssh_timeout
-  pause_before_connecting = "1m"
+  pause_before_connecting = "3m"
 
   skip_export             = true
   keep_registered         = true
