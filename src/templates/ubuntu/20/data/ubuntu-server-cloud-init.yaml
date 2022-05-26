@@ -60,6 +60,7 @@ autoinstall:
     - ca-certificates
     - curl
     - wget
+    - lsb-release
   user-data:
     disable_root: false
     package_update: true
