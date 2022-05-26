@@ -5,13 +5,13 @@ install: init-plugins cleanup pre-install install-vm sleep setup sleep seeding s
 install-vm: install--agh-db boot--agh-db install--agh-k3s boot--agh-k3s
 
 .PHONY: setup
-install-vm: setup--agh-db setup--agh-k3s
+setup: setup--agh-db setup--agh-k3s
 
 .PHONY: seeding
-install-vm: seeding--agh-db seeding--agh-k3s
+seeding: seeding--agh-db seeding--agh-k3s
 
 .PHONY: check
-install-vm: check--agh-db check--agh-k3s
+check: check--agh-db check--agh-k3s
 
 .PHONY: init-plugins
 init-plugins:
