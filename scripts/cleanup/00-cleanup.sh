@@ -24,10 +24,10 @@ sleep 1
 
 if [ -d "/vmfs/volumes/$DATASTORE/packer_cache/" ]; then
   echo "Backup ISO image..."
-  cp -a "/vmfs/volumes/$DATASTORE/packer_cache/*.iso" /tmp 2>/dev/null || :
+  cp /vmfs/volumes/"$DATASTORE"/packer_cache/*.iso /tmp/ 2>/dev/null || :
   echo "Cleanup Packer cache..."
-  rm -rf "/vmfs/volumes/$DATASTORE/packer_cache/"
+  rm -rf /vmfs/volumes/"$DATASTORE"/packer_cache/
   echo "Restore ISO image..."
-  mkdir -p "/vmfs/volumes/$DATASTORE/packer_cache/"
-  cp -a "/tmp/*.iso" "/vmfs/volumes/$DATASTORE/packer_cache" 2>/dev/null || :
+  mkdir -p /vmfs/volumes/"$DATASTORE"/packer_cache/
+  cp /tmp/*.iso /vmfs/volumes/"$DATASTORE"/packer_cache 2>/dev/null || :
 fi
