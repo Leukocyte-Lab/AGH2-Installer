@@ -13,11 +13,11 @@ vm = {
   }
   network     = {
     adapter     = "vmxnet3"
-    name        = "VM Network"
+    name        = lookup(config.vm.db, "ip-group", "VM Network")
     hostname    = "agh-db"
-    ip          = "10.120.2.2/16"
-    gateway     = "10.120.0.1"
-    nameserver  = "10.120.0.1"
+    ip          = lookup(config.vm.db, "ip")
+    gateway     = lookup(config.vm.db, "gateway")
+    nameserver  = lookup(config.vm.db, "nameserver")
   }
   instance      = {
     language      = "en_US"
@@ -40,16 +40,19 @@ vm = {
     checksum    = "28ccdb56450e643bad03bb7bcf7507ce3d8d90e8bf09e38f6bd9ac298a98eaad"
   }
   auth        = {
-    username           = "agh-db"
-    password           = "password"
-    password_encrypted = "$6$4096$B4rZCyN5MXGeiTXK0Oe47FfKBcnuvSO2FbRTsq0U8Ms/w4U8gB.UAlXrV75zw3csrWMUAl9A6dEOT4Cl8DCrY1"
+    username           = lookup(config.vm.db, "user", "agh-db")
+    password           = lookup(config.vm.server, "password")
+    password_encrypted = lookup(config.vm.server, "password-encrypted")
     ssh_port           = 22
     ssh_timeout        = "30m"
   }
   provision     = {
     ip_wait_timeout    = "20m"
     shutdown_timeout   = "15m"
-    scripts            = []
+    scripts            = [
+      "./scripts/general/00-check-ip.sh",
+      "./scripts/general/01-setup-mirror.sh",
+    ]
     setup              = [
       "./scripts/db/00-install-postgress.sh",
       "./scripts/db/01-setup-postgress.sh",
@@ -72,14 +75,16 @@ vm = {
       "./artifacts/config/sources.list",
     ]
     env                = [
-      "MINIO_ROOT_USER=minio",
-      "MINIO_ROOT_PASSWORD=minio-password",
-      "DB_USER=agh",
-      "DB_PASSWORD=password",
-      "MINIO_CORE_USER=core-minio-user",
-      "MINIO_CORE_PASSWORD=core-minio-password",
-      "MINIO_CAPT_USER=capt-minio-user",
-      "MINIO_CAPT_PASSWORD=capt-minio-password",
+      join("=", ["DB_USER", lookup(config.secret.db, "user", "agh")]),
+      join("=", ["DP_PASSWORD", lookup(config.vm.db, "password")]),
+      join("=", ["MINIO_ROOT_USER", lookup(config.secret.minio, "root-user", "minio")]),
+      join("=", ["MINIO_ROOT_PASSWORD", lookup(config.secret.minio, "root-password")]),
+      join("=", ["MINIO_CORE_USER", lookup(config.secret.minio, "core-user", "core-minio-user")]),
+      join("=", ["MINIO_CORE_PASSWORD", lookup(config.secret.minio, "core-password")]),
+      join("=", ["MINIO_CORE_USER", lookup(config.secret.minio, "capt-user", "capt-minio-user")]),
+      join("=", ["MINIO_CAPT_PASSWORD", lookup(config.secret.minio, "capt-password")]),
+      join("=", ["IMAGE_CREDENTIAL_USER", lookup(config.secret.image-credential, "user")]),
+      join("=", ["IMAGE_CREDENTIAL_USER", lookup(config.secret.image-credential, "password")]),
     ]
   }
 }
