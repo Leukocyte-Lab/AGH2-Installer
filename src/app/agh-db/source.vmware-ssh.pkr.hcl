@@ -1,0 +1,1 @@
+../../templates/general/source.vmware-ssh.pkr.hcl

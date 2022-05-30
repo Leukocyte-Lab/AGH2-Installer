@@ -1,1 +1,0 @@
-../templates/general/variables.vm.pkr.hcl

@@ -5,41 +5,41 @@ locals {
 source "vmware-iso" "ubuntu-server" {
 
   // Hypervisor Connection
-  remote_type                       = var.hypervisor.type
-  remote_host                       = var.hypervisor.host
-  remote_username                   = var.hypervisor.username
-  remote_password                   = var.hypervisor.password
-  skip_validate_credentials         = var.hypervisor.insecure
-  insecure_connection               = var.hypervisor.insecure
+  remote_type                       = local.hypervisor.type
+  remote_host                       = local.hypervisor.host
+  remote_username                   = local.hypervisor.username
+  remote_password                   = local.hypervisor.password
+  skip_validate_credentials         = local.hypervisor.insecure
+  insecure_connection               = local.hypervisor.insecure
 
   // Hypervisor Provision
   vnc_disable_password              = true
   vnc_over_websocket                = true
 
   // Virtual Machine Settings
-  remote_datastore                  = var.hypervisor.datastore
-  vm_name                           = var.vm.name
-  guest_os_type                     = var.vm.hw.type
-  cpus                              = var.vm.hw.cpus
-  memory                            = var.vm.hw.mem
-  version                           = var.vm.hw.version
+  remote_datastore                  = local.hypervisor.datastore
+  vm_name                           = local.vm.name
+  guest_os_type                     = local.vm.hw.type
+  cpus                              = local.vm.hw.cpus
+  memory                            = local.vm.hw.mem
+  version                           = local.vm.hw.version
 
   // Disk Settings
-  disk_adapter_type                 = var.vm.disk.adapter
-  disk_type_id                      = var.vm.disk.type
-  disk_size                         = var.vm.disk.size
-  skip_compaction                   = var.vm.disk.type == 0 ? true : false
+  disk_adapter_type                 = local.vm.disk.adapter
+  disk_type_id                      = local.vm.disk.type
+  disk_size                         = local.vm.disk.size
+  skip_compaction                   = local.vm.disk.type == 0 ? true : false
 
   // Network Settings
-  network_adapter_type              = var.vm.network.adapter
-  network_name                      = var.vm.network.name
+  network_adapter_type              = local.vm.network.adapter
+  network_name                      = local.vm.network.name
 
   // ISO Settings
-  cdrom_adapter_type                = var.vm.instance.cdrom_type
+  cdrom_adapter_type                = local.vm.instance.cdrom_type
 
   // Removable Media Settings
-  iso_checksum                      = "${var.vm.iso.hash}:${var.vm.iso.checksum}"
-  iso_urls                          = var.vm.iso.urls
+  iso_checksum                      = "${local.vm.iso.hash}:${local.vm.iso.checksum}"
+  iso_urls                          = local.vm.iso.urls
   tools_upload_flavor               = "linux"
 
   // VMX
@@ -56,20 +56,20 @@ source "vmware-iso" "ubuntu-server" {
   }
 
   // Boot and Provisioning Settings
-  http_port_min = var.vm.instance.http_port.min
-  http_port_max = var.vm.instance.http_port.max
+  http_port_min = local.vm.instance.http_port.min
+  http_port_max = local.vm.instance.http_port.max
   http_content = {
     "/meta-data"          = file("data/meta-data")
     "/user-data"          = templatefile("data/ubuntu-server-cloud-init.yaml", {
-      hostname            = var.vm.network.hostname
-      username            = var.vm.auth.username
-      password_encrypted  = var.vm.auth.password_encrypted
-      ip                  = var.vm.network.ip
-      gateway             = var.vm.network.gateway
-      nameserver          = var.vm.network.nameserver
-      language            = var.vm.instance.language
-      keyboard            = var.vm.instance.keyboard
-      timezone            = var.vm.instance.timezone
+      hostname            = local.vm.network.hostname
+      username            = local.vm.auth.username
+      password_encrypted  = local.vm.auth.password_encrypted
+      ip                  = local.vm.network.ip
+      gateway             = local.vm.network.gateway
+      nameserver          = local.vm.network.nameserver
+      language            = local.vm.instance.language
+      keyboard            = local.vm.instance.keyboard
+      timezone            = local.vm.instance.timezone
     })
   }
 
@@ -78,8 +78,8 @@ source "vmware-iso" "ubuntu-server" {
     "c",
     "linux /casper/vmlinuz quiet ",
     "autoinstall ",
-    "ip=${split("/", var.vm.network.ip)[0]}::${var.vm.network.gateway}:${cidrnetmask(var.vm.network.ip)}:${var.vm.network.hostname}:: ",
-    "nameserver=${var.vm.network.nameserver} ",
+    "ip=${split("/", local.vm.network.ip)[0]}::${local.vm.network.gateway}:${cidrnetmask(local.vm.network.ip)}:${local.vm.network.hostname}:: ",
+    "nameserver=${local.vm.network.nameserver} ",
     "ds=\"nocloud-net;s=http://{{.HTTPIP}}:{{.HTTPPort}}/\" ---",
     "<enter><wait>",
     "initrd /casper/initrd",
@@ -89,16 +89,16 @@ source "vmware-iso" "ubuntu-server" {
   ]
   boot_key_interval       = "10ms"
 
-  shutdown_command = "echo '${var.vm.auth.password}' | sudo -S -E systemctl poweroff"
-  shutdown_timeout = var.vm.provision.shutdown_timeout
+  shutdown_command = "echo '${local.vm.auth.password}' | sudo -S -E systemctl poweroff"
+  shutdown_timeout = local.vm.provision.shutdown_timeout
 
   // Communicator Settings and Credentials
   communicator            = "ssh"
   ssh_handshake_attempts  = 20
-  ssh_username            = var.vm.auth.username
-  ssh_password            = var.vm.auth.password
-  ssh_port                = var.vm.auth.ssh_port
-  ssh_timeout             = var.vm.auth.ssh_timeout
+  ssh_username            = local.vm.auth.username
+  ssh_password            = local.vm.auth.password
+  ssh_port                = local.vm.auth.ssh_port
+  ssh_timeout             = local.vm.auth.ssh_timeout
   pause_before_connecting = "3m"
 
   skip_export             = true
