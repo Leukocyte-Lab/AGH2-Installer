@@ -1,4 +1,5 @@
-# MINIO_ROOT_PASSWORD= $(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 20)
+#!/bin/bash
+
 read MINIO_ROOT_PASSWORD <<< $(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 20)
 read DB_PASSWORD <<< $(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 20)
 read MINIO_CORE_PASSWORD <<< $(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 20)
