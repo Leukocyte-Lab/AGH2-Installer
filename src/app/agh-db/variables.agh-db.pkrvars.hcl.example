@@ -1,9 +1,9 @@
 vm = {
-  name        = "AGH-DB"
+  name        = "ArgusHack-DB"
   hw          = {
     type        = "ubuntu-64"
-    cpus        = 8
-    mem         = 16384
+    cpus        = 4
+    mem         = 8192
     version     = "17"
   }
   disk        = {
@@ -46,12 +46,12 @@ vm = {
     password_encrypted = "$6$4096$B4rZCyN5MXGeiTXK0Oe47FfKBcnuvSO2FbRTsq0U8Ms/w4U8gB.UAlXrV75zw3csrWMUAl9A6dEOT4Cl8DCrY1"
     ssh_port           = 22
     ssh_timeout        = "30m"
-
   }
   provision     = {
     ip_wait_timeout    = "20m"
     shutdown_timeout   = "15m"
-    scripts            = [
+    scripts            = []
+    setup              = [
       "./scripts/db/00-install-postgress.sh",
       "./scripts/db/01-setup-postgress.sh",
       "./scripts/db/02-setup-firewall.sh",
@@ -63,6 +63,7 @@ vm = {
     seeding            = [
       "./scripts/db/04-seed-databases.sh",
     ]
+    check              = []
     files              = [
       "./artifacts/db/attack.sql",
       "./artifacts/db/ATTACK-mitre_groups.sql",

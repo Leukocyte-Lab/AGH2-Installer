@@ -1,4 +1,4 @@
-source "null" "seeding" {
+source "null" "setup" {
   // Communicator Settings and Credentials
   communicator            = "ssh"
   ssh_handshake_attempts  = 20
@@ -9,7 +9,7 @@ source "null" "seeding" {
 }
 
 build {
-  sources = ["source.null.seeding"]
+  sources = ["source.null.setup"]
 
   provisioner "file" {
     sources = var.vm.provision.files
@@ -22,7 +22,7 @@ build {
       "USERNAME=${var.vm.auth.username}",
       "IP=${var.vm.network.ip}"
     ], var.vm.provision.env)
-    scripts = var.vm.provision.seeding
+    scripts = var.vm.provision.setup
     expect_disconnect = true
   }
 }

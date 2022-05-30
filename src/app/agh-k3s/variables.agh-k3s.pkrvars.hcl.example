@@ -1,5 +1,5 @@
 vm = {
-  name        = "AGH-K3S-Master"
+  name        = "ArgusHack-Server-M01"
   hw          = {
     type        = "ubuntu-64"
     cpus        = 8
@@ -14,7 +14,7 @@ vm = {
   network     = {
     adapter     = "vmxnet3"
     name        = "VM Network"
-    hostname    = "agh-k3s-master"
+    hostname    = "agh-server-m01"
     ip          = "10.120.2.1/16"
     netmask     = "255.255.0.0"
     gateway     = "10.120.0.1"
@@ -46,12 +46,12 @@ vm = {
     password_encrypted = "$6$4096$B4rZCyN5MXGeiTXK0Oe47FfKBcnuvSO2FbRTsq0U8Ms/w4U8gB.UAlXrV75zw3csrWMUAl9A6dEOT4Cl8DCrY1"
     ssh_port           = 22
     ssh_timeout        = "30m"
-
   }
   provision     = {
     ip_wait_timeout    = "20m"
     shutdown_timeout   = "15m"
-    scripts            = [
+    scripts            = []
+    setup              = [
       "./scripts/cluster/00-install-k3s.sh",
       "./scripts/cluster/01-setup-k3s.sh",
       "./scripts/cluster/02-generate-deployment.sh",

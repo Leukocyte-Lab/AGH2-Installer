@@ -8,6 +8,9 @@ variable "hypervisor" {
     type        = string
     datastore   = string
     insecure    = bool
+    provision     = object({
+      cleanup        = list(string)
+    })
   })
   default     = {
     host        = "esxi.local"
@@ -17,5 +20,8 @@ variable "hypervisor" {
     type        = "esx5"
     datastore   = "datastore1"
     insecure    = true
+    provision   = {
+      cleanup     = []
+    }
   }
 }

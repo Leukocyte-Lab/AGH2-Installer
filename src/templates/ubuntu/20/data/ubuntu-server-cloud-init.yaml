@@ -3,12 +3,21 @@ autoinstall:
   version: 1
   apt:
     geoip: true
-    preserve_sources_list: true
+    preserve_sources_list: false
     primary:
-      - arches: [amd64, i386]
+      - arches: [default, amd64, aarch64, i386]
+        uri: http://free.nchc.org.tw/ubuntu
+      - arches: [default, amd64, aarch64, i386]
         uri: http://tw.archive.ubuntu.com/ubuntu
-      - arches: [default]
-        uri: http://ports.ubuntu.com/ubuntu-ports
+      - arches: [default, amd64, aarch64, i386]
+        uri: http://archive.ubuntu.com/ubuntu
+    security:
+      - arches: [default, amd64, aarch64, i386]
+        uri: http://free.nchc.org.tw/ubuntu
+      - arches: [default, amd64, aarch64, i386]
+        uri: http://tw.archive.ubuntu.com/ubuntu
+      - arches: [default, amd64, aarch64, i386]
+        uri: http://archive.ubuntu.com/ubuntu
   early-commands:
     # Ensures that Packer does not connect too soon.
     - sudo systemctl stop ssh
@@ -51,6 +60,7 @@ autoinstall:
     - ca-certificates
     - curl
     - wget
+    - lsb-release
   user-data:
     disable_root: false
     package_update: true
