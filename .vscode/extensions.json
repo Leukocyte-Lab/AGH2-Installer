@@ -4,9 +4,12 @@
     "wholroyd.HCL"
   ],
   "files.associations": {
+    "*.hcl": "hcl",
     "*.pkrvars.hcl": "packervars",
-    "*.pkrvars.hcl.example": "packervars",
     "variables.*.pkr.hcl": "packervars",
-    "*.hcl": "hcl"
+    "*.pkrvars.hcl.example": "packervars",
+    "locals.*.pkr.hcl": "packer",
+    "build.*.pkr.hcl": "packer",
+    "*.pkr.hcl": "packer"
   }
 }

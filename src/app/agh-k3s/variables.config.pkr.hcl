@@ -1,0 +1,1 @@
+../../templates/general/variables.config.pkr.hcl

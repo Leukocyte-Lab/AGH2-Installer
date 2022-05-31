@@ -18,7 +18,6 @@ variable "vm" {
       hostname    = string
       name        = string
       ip          = string
-      netmask     = string
       gateway     = string
       nameserver  = string
     })

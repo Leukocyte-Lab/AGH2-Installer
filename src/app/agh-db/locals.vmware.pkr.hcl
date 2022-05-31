@@ -1,0 +1,1 @@
+../../templates/general/locals.vmware.pkr.hcl
