@@ -29,5 +29,4 @@ crash.log
 # General
 .DS_Store
 *.log
-
-scripts/license/out/*
+out/*
