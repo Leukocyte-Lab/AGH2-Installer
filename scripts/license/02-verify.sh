@@ -17,7 +17,17 @@ if [ $? -eq 0 ]; then
   dec_key=$(cat ./out/license.json | jq -r .enc | tr '_-' '/+' | base64 --decode | jq -r .data.attributes.key)
 
   echo -e "\033[32mLicense key is cryptographically valid!\033[0m"
-  echo -e "  => \033[34m$dec_key\033[0m"
+  echo ""
+  echo ""
+  echo -e "\033[34mPlease keep the License Key,\033[0m"
+  echo -e "\033[34mThis key will use to activate your \033[31mArgusHack\033[34m product later.\033[0m"
+  echo ""
+  echo -e "\033[31m========================================\033[0m"
+  echo -e "\033[31mArgusHack License Key\033[0m"
+  echo -e "\033[31m----------------------------------------\033[0m"
+  echo -e "\033[37m$dec_key\033[0m"
+  echo -e "\033[31m========================================\033[0m"
+  echo ""
 
   exit 0
 else
