@@ -6,7 +6,7 @@ license--get:
 	scripts/license/00-get-license.sh
 
 .PHONY: license--verify
-license-verify:
+license--verify:
 	scripts/license/01-parse.sh && \
 	scripts/license/02-verify.sh
 
