@@ -1,6 +1,15 @@
 .PHONY: install
 install: init-plugins cleanup pre-install install-vm sleep setup sleep seeding sleep check post-install
 
+.PHONY: license--get
+license--get:
+	scripts/license/00-get-license.sh
+
+.PHONY: license--verify
+license-verify:
+	scripts/license/01-parse.sh && \
+	scripts/license/02-verify.sh
+
 .PHONY: install-vm
 install-vm: install--agh-db boot--agh-db install--agh-k3s boot--agh-k3s
 
