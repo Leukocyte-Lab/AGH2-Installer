@@ -59,36 +59,41 @@ read JWT_SECRET <<< $(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 20)
 read VM_PASSWORD <<< $(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 20)
 read VM_PASSWORD_ENCRYPTED <<< $(openssl passwd -6 -salt 4096 $VM_PASSWORD)
 
+CREATE_LICENSE_REQUEST_BODY=$(cat << EOF
+{
+    "data": {
+        "type": "licenses",
+        "attributes": {
+            "name": "$PROJECT_NAME",
+            "expiry": "$EXPIRY_DATE",
+            "metadata": {
+            "releaseChannelUrl": "https://leukocyte-lab.github.io/release/$PROJECT_NAME/version.yaml",
+            "updaterRegistryUrl": "registry.lkc-lab.com/leukocyte-lab/argushack2/worker-init",
+            "MINIO_ROOT_PASSWORD": "$MINIO_ROOT_PASSWORD",
+            "DB_PASSWORD": "$DB_PASSWORD",
+            "MINIO_CORE_PASSWORD": "$MINIO_CORE_PASSWORD",
+            "MINIO_CAPT_PASSWORD": "$MINIO_CAPT_PASSWORD",
+            "JWT_SECRET": "$JWT_SECRET",
+            "VM_PASSWORD": "$VM_PASSWORD",
+            "VM_PASSWORD_ENCRYPTED": "$VM_PASSWORD_ENCRYPTED"
+            }
+        },
+        "relationships": {
+            "policy": {
+                "data": { "type": "policies", "id": "$POLICY_ID" }
+            }
+        }
+    }
+}
+EOF
+) ;
+
 
 LICENSE_INFO=$( curl -s -X POST https://api.keygen.sh/v1/accounts/$account_id/licenses \
   -H 'Content-Type: application/vnd.api+json' \
   -H 'Accept: application/vnd.api+json' \
   -H "Authorization: Bearer $token" \
-  -d "{
-        \"data\": {
-          \"type\": \"licenses\",
-          \"attributes\": {
-              \"name\": \"$PROJECT_NAME\",
-              \"expiry\": \"$EXPIRY_DATE\",
-              \"metadata\": {
-                \"releaseChannelUrl\": \"https://leukocyte-lab.github.io/release/$PROJECT_NAME/version.yaml\",
-                \"updaterRegistryUrl\": \"registry.lkc-lab.com/leukocyte-lab/argushack2/worker-init\",
-                \"MINIO_ROOT_PASSWORD\": \"$MINIO_ROOT_PASSWORD\",
-                \"DB_PASSWORD\": \"$DB_PASSWORD\",
-                \"MINIO_CORE_PASSWORD\": \"$MINIO_CORE_PASSWORD\",
-                \"MINIO_CAPT_PASSWORD\": \"$MINIO_CAPT_PASSWORD\",
-                \"JWT_SECRET\": \"$JWT_SECRET\",
-                \"VM_PASSWORD\": \"$VM_PASSWORD\",
-                \"VM_PASSWORD_ENCRYPTED\": \"$VM_PASSWORD_ENCRYPTED\"
-               }
-          },
-          \"relationships\": {
-            \"policy\": {
-              \"data\": { \"type\": \"policies\", \"id\": \"$POLICY_ID\" }
-            }
-          }
-        }
-      }" )
+  -d "$CREATE_LICENSE_REQUEST_BODY" )
 
 LICENSE_ID=$( echo $LICENSE_INFO | jq -r .data.id )
 if [ "$LICENSE_ID" = null ]; then
@@ -103,10 +108,13 @@ fi
 ENTITLEMENTS_DATA=""
 COUNT=0
 for ENTITLEMENTS in "${ENTITLEMENTS_ARR[@]}"; do
-    ENTITLEMENTS_DATA=$ENTITLEMENTS_DATA"{
-        \"type\": \"entitlements\",
-        \"id\": \"$ENTITLEMENTS\"
-        }"
+    ENTITLEMENTS_DATA=$(cat << EOF
+$ENTITLEMENTS_DATA{
+    "type": "entitlements",
+    "id": "$ENTITLEMENTS"
+}
+EOF
+)
     let COUNT+=1
     if [[ "$COUNT" != ${#ENTITLEMENTS_ARR[@]} ]]
     then
@@ -114,12 +122,17 @@ for ENTITLEMENTS in "${ENTITLEMENTS_ARR[@]}"; do
     fi
 done
 
+ATTACH_ENTITLEMENT_REQUESR_BODY=$(cat << EOF
+{"data": [$ENTITLEMENTS_DATA]}
+EOF
+)
+
 STATE_CODE="0"
-STATE_CODE=$( curl -o /dev/null -w "%{http_code}" -s -X POST https://api.keygen.sh/v1/accounts/cecdf76b-c357-45de-b422-d33467c89808/licenses/$LICENSE_ID/entitlements \
+STATE_CODE=$( curl -o /dev/null -w "%{http_code}" -s -X POST https://api.keygen.sh/v1/accounts/$account_id/licenses/$LICENSE_ID/entitlements \
 -H 'Content-Type: application/vnd.api+json' \
 -H 'Accept: application/vnd.api+json' \
 -H "Authorization: Bearer $token" \
--d "{\"data\": [$ENTITLEMENTS_DATA]}" )
+-d "$ATTACH_ENTITLEMENT_REQUESR_BODY" )
 if [ "$STATE_CODE" != "200" ]; then
     echo -ne "\033[31mOpps Something was wrong, when attach entitlements\n\033[0m"
     exit 1
