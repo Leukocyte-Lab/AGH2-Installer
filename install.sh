@@ -28,12 +28,12 @@ license_handler() {
   done
 }
 
-echo "Check License..."
+echo -e "\033[34mCheck License...\033[0m"
 license_handler && \
 make license--verify
 
-echo "Load ArgusHack Installer..."
+echo -e "\033[34mLoad ArgusHack Installer...\033[0m"
 source ./scripts/env/00-inject-env.sh
 
-echo "Running ArgusHack Installer..."
+echo -e "\033[34mRunning ArgusHack Installer...\033[0m"
 make install
