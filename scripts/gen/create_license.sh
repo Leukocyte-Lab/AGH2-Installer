@@ -59,6 +59,27 @@ read JWT_SECRET <<< $(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 20)
 read VM_PASSWORD <<< $(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 20)
 read VM_PASSWORD_ENCRYPTED <<< $(openssl passwd -6 -salt 4096 $VM_PASSWORD)
 
+echo="MINIO_ROOT_PASSWORD="$MINIO_ROOT_PASSWORD
+echo="DB_PASSWORD="$DB_PASSWORD
+echo="MINIO_CORE_PASSWORD="$MINIO_CORE_PASSWORD
+echo="MINIO_CAPT_PASSWORD="$MINIO_CAPT_PASSWORD
+echo="JWT_SECRET="$JWT_SECRET
+echo="VM_PASSWORD="$VM_PASSWORD
+echo="VM_PASSWORD_ENCRYPTED="$VM_PASSWORD_ENCRYPTED
+
+METADATA_SECRET=$( echo $(cat <<EOF
+{
+    "MINIO_ROOT_PASSWORD": "$MINIO_ROOT_PASSWORD",
+    "DB_PASSWORD": "$DB_PASSWORD",
+    "MINIO_CORE_PASSWORD": "$MINIO_CORE_PASSWORD",
+    "MINIO_CAPT_PASSWORD": "$MINIO_CAPT_PASSWORD",
+    "JWT_SECRET": "$JWT_SECRET",
+    "VM_PASSWORD": "$VM_PASSWORD",
+    "VM_PASSWORD_ENCRYPTED": "$VM_PASSWORD_ENCRYPTED"
+}
+EOF
+) | base64 )
+
 CREATE_LICENSE_REQUEST_BODY=$(cat << EOF
 {
     "data": {
@@ -69,13 +90,7 @@ CREATE_LICENSE_REQUEST_BODY=$(cat << EOF
             "metadata": {
             "releaseChannelUrl": "https://leukocyte-lab.github.io/release/$PROJECT_NAME/version.yaml",
             "updaterRegistryUrl": "registry.lkc-lab.com/leukocyte-lab/argushack2/worker-init",
-            "MINIO_ROOT_PASSWORD": "$MINIO_ROOT_PASSWORD",
-            "DB_PASSWORD": "$DB_PASSWORD",
-            "MINIO_CORE_PASSWORD": "$MINIO_CORE_PASSWORD",
-            "MINIO_CAPT_PASSWORD": "$MINIO_CAPT_PASSWORD",
-            "JWT_SECRET": "$JWT_SECRET",
-            "VM_PASSWORD": "$VM_PASSWORD",
-            "VM_PASSWORD_ENCRYPTED": "$VM_PASSWORD_ENCRYPTED"
+            "secret": "$METADATA_SECRET"
             }
         },
         "relationships": {
