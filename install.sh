@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+source ./scripts/license/ff-license-handler.sh
+
 echo -e "\033[31m=====================\033[0m"
 echo -e "\033[31m ArgusHack Installer \033[0m"
 echo -e "\033[31m=====================\033[0m"
