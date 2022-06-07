@@ -28,11 +28,11 @@ license_handler && \
 make license--verify
 
 echo -ne "\033[34mLoad ArgusHack Installer...\033[0m"
-source ./scripts/env/00-inject-env.sh secret
+source ./scripts/env/00-inject-env.sh secret SECRET_
 echo -e "\033[32mDONE\033[0m"
 
 echo -ne "\033[34mLoading configuration...\033[0m"
-if ![ -f "./out/config.json" ] || ![ -f "./out/secret.json" ] ; then
+if [ ! -f "./out/config.json" ] || [ ! -f "./out/secret.json" ] ; then
   ./scripts/env/02-set-env.sh
 fi
 source ./scripts/env/00-inject-env.sh config
