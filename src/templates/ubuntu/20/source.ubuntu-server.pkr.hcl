@@ -77,10 +77,10 @@ source "vmware-iso" "ubuntu-server" {
   boot_command = [
     "c",
     "linux /casper/vmlinuz quiet ",
-    "autoinstall ",
     "ip=${split("/", local.vm.network.ip)[0]}::${local.vm.network.gateway}:${cidrnetmask(local.vm.network.ip)}:${local.vm.network.hostname}:: ",
     "nameserver=${local.vm.network.nameserver} ",
-    "ds=\"nocloud-net;s=http://{{.HTTPIP}}:{{.HTTPPort}}/\" ---",
+    "ds=\"nocloud-net;s=http://{{.HTTPIP}}:{{.HTTPPort}}/\" ",
+    "quiet autoinstall --- ",
     "<enter><wait>",
     "initrd /casper/initrd",
     "<enter><wait>",
