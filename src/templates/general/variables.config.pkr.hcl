@@ -55,6 +55,7 @@ variable "config" {
           account-id    = string
         })
       })
+      jwt-secret    = string
     })
   })
   default     = {
