@@ -15,8 +15,8 @@ echo -ne "\033[34mInstalling ArgusHack Installer dependencies...\033[0m"
 sudo apt update && \
 sudo apt install -y openssh-client ca-certificates openssl build-essential unzip lsb-release jq sshpass
 
-curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add - && \
-sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+echo "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list && \
+curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
 
 sudo apt update && \
 sudo apt install -y packer
