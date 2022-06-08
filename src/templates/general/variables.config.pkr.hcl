@@ -8,20 +8,22 @@ variable "config" {
     })
     vm          = object({
       db          = object({
-        user        = string
-        password    = string
-        ip          = string
-        ip-group    = string
-        gateway     = string
-        nameserver  = string
+        user               = string
+        password           = string
+        password-encrypted = string
+        ip                 = string
+        ip-group           = string
+        gateway            = string
+        nameserver         = string
       })
       server      = object({
-        user        = string
-        password    = string
-        ip          = string
-        ip-group    = string
-        gateway     = string
-        nameserver  = string
+        user               = string
+        password           = string
+        password-encrypted = string
+        ip                 = string
+        ip-group           = string
+        gateway            = string
+        nameserver         = string
       })
     })
     secret      = object({
