@@ -100,8 +100,8 @@ variable "config" {
           password    = env("SECRET_MINIO_CORE_PASSWORD")
         }
         captain     = {
-          user        = env("SECRET_MINIO_CAPTAIN_USER")
-          password    = env("SECRET_MINIO_CAPTAIN_PASSWORD")
+          user        = env("SECRET_MINIO_CAPT_USER")
+          password    = env("SECRET_MINIO_CAPT_PASSWORD")
         }
       }
       credential    = {
