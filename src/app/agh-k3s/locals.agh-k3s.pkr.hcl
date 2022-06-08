@@ -72,7 +72,7 @@ locals {
         join("=", ["KEYGEN_ACCOUNT_ID", lookup(var.config.secret.credential.keygen, "account-id", "")]),
         join("=", ["DB_IP", split("/", lookup(var.config.vm.db, "ip", ""))[0]]),
         join("=", ["DB_USER", coalesce(lookup(var.config.secret.db, "user", "agh"), "agh")]),
-        join("=", ["DP_PASSWORD", lookup(var.config.secret.db, "password", "")]),
+        join("=", ["DB_PASSWORD", lookup(var.config.secret.db, "password", "")]),
         join("=", ["MINIO_ROOT_USER", coalesce(lookup(var.config.secret.minio.root, "user", "minio"), "minio")]),
         join("=", ["MINIO_ROOT_PASSWORD", lookup(var.config.secret.minio.root, "password", "")]),
         join("=", ["MINIO_CORE_USER", coalesce(lookup(var.config.secret.minio.core, "user", "core-minio-user"), "core-minio-user")]),
