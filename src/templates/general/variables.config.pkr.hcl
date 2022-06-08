@@ -11,6 +11,7 @@ variable "config" {
         user        = string
         password    = string
         ip          = string
+        ip-group    = string
         gateway     = string
         nameserver  = string
       })
@@ -18,6 +19,7 @@ variable "config" {
         user        = string
         password    = string
         ip          = string
+        ip-group    = string
         gateway     = string
         nameserver  = string
       })
