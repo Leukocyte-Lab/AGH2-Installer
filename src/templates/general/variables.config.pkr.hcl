@@ -64,20 +64,22 @@ variable "config" {
     }
     vm          = {
       db          = {
-        user        = env("VM_DB_USER")
-        password    = env("VM_DB_PASSWORD")
-        ip          = env("VM_DB_IP")
-        ip-group    = env("VM_DB_IP_GROUP")
-        gateway     = env("VM_DB_GATEWAY")
-        nameserver  = env("VM_DB_NS")
+        user               = env("VM_DB_USER")
+        password           = env("VM_DB_PASSWORD")
+        password-encrypted = env("VM_DB_PASSWORD_ENCRYPTED")
+        ip                 = env("VM_DB_IP")
+        ip-group           = env("VM_DB_IP_GROUP")
+        gateway            = env("VM_DB_GATEWAY")
+        nameserver         = env("VM_DB_NS")
       }
       server      = {
-        user        = env("VM_SERVER_USER")
-        password    = env("VM_SERVER_PASSWORD")
-        ip          = env("VM_SERVER_IP")
-        ip-group    = env("VM_SERVER_IP_GROUP")
-        gateway     = env("VM_SERVER_GATEWAY")
-        nameserver  = env("VM_SERVER_NS")
+        user               = env("VM_SERVER_USER")
+        password           = env("VM_SERVER_PASSWORD")
+        password-encrypted = env("VM_SERVER_PASSWORD_ENCRYPTED")
+        ip                 = env("VM_SERVER_IP")
+        ip-group           = env("VM_SERVER_IP_GROUP")
+        gateway            = env("VM_SERVER_GATEWAY")
+        nameserver         = env("VM_SERVER_NS")
       }
     }
     secret      = {
