@@ -9,6 +9,12 @@ read token
 echo -ne "\033[34mPlease enter project name: \033[0m"
 read PROJECT_NAME
 
+echo -ne "\033[34mPlease enter image user: \033[0m"
+read IMAGE_USER
+
+echo -ne "\033[34mPlease enter image password: \033[0m"
+read IMAGE_PASSWORD
+
 VALID_EXPIRY=false
 until [ "$VALID_EXPIRY" = "true" ]; do
     echo -ne "\033[34mPlease enter expripry date (YYYY-mm-dd): \033[0m"
@@ -67,7 +73,7 @@ echo="JWT_SECRET="$JWT_SECRET
 echo="VM_PASSWORD="$VM_PASSWORD
 echo="VM_PASSWORD_ENCRYPTED="$VM_PASSWORD_ENCRYPTED
 
-METADATA_SECRET=$( echo $(cat <<EOF
+METADATA_SECRET=`echo $( base64 <<< cat <<EOF
 {
     "MINIO_ROOT_PASSWORD": "$MINIO_ROOT_PASSWORD",
     "DB_PASSWORD": "$DB_PASSWORD",
@@ -75,10 +81,14 @@ METADATA_SECRET=$( echo $(cat <<EOF
     "MINIO_CAPT_PASSWORD": "$MINIO_CAPT_PASSWORD",
     "JWT_SECRET": "$JWT_SECRET",
     "VM_PASSWORD": "$VM_PASSWORD",
-    "VM_PASSWORD_ENCRYPTED": "$VM_PASSWORD_ENCRYPTED"
+    "VM_PASSWORD_ENCRYPTED": "$VM_PASSWORD_ENCRYPTED",
+    "IMAGE_USER": "${IMAGE_USER}",
+    "IMAGE_PASSWORD": "${IMAGE_PASSWORD}",
+    "KEYGEN_API_TOKEN": "${token}",
+    "KEYGEN_ACCOUNT_ID": "${account_id}"
 }
 EOF
-) | base64 )
+) | tr -d ' '`
 
 CREATE_LICENSE_REQUEST_BODY=$(cat << EOF
 {
