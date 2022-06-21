@@ -54,6 +54,7 @@ variable "config" {
           api-token     = string
           account-id    = string
         })
+        cert-private-key = string
       })
       jwt-secret    = string
     })
@@ -113,6 +114,7 @@ variable "config" {
           api-token     = env("SECRET_KEYGEN_API_TOKEN")
           account-id    = env("SECRET_KEYGEN_ACCOUNT_ID")
         }
+        cert-private-key = env("CERT_PRIVATE_KEY")
       }
       jwt-secret     = env("SECRET_JWT_SECRET")
     }
