@@ -1,10 +1,23 @@
 #!/bin/bash
 
 
-echo -ne "\033[34mPlease enter Account ID: \033[0m"
-read account_id
-echo -ne "\033[34mPlease enter Token: \033[0m"
-read token
+while [ true ];do
+    echo -ne "\033[34mPlease enter Account ID: \033[0m"
+    read account_id
+    echo -ne "\033[34mPlease enter Token: \033[0m"
+    read token
+    listEntitlement=`curl -s https://api.keygen.sh/v1/accounts/$account_id/entitlements?limit=100 -g \
+    -H 'Accept: application/vnd.api+json' \
+    -H "Authorization: Bearer $token"`
+        errors=`echo $listEntitlement | jq -r .errors`
+        if [ $errors = null ]
+        then
+        break
+        else
+        echo $errors
+        echo -ne "\033[31mCheck Account and token\n\033[0m"
+        fi
+done
 
 echo -ne "\033[34mPlease enter project name: \033[0m"
 read PROJECT_NAME
@@ -40,9 +53,6 @@ until [ "$POLICY_ID" != "" ]; do
         esac
 done
 
-listEntitlement=`curl -s https://api.keygen.sh/v1/accounts/$account_id/entitlements?limit=100 -g \
-  -H 'Accept: application/vnd.api+json' \
-  -H "Authorization: Bearer $token"`
 listEntitlementID=`echo $listEntitlement | jq -r '.data[] | .id'`
 entitlementIDLen=0
 idArray=(`echo $listEntitlementID | tr ' ' ' '`)
