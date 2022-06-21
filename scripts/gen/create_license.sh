@@ -40,21 +40,33 @@ until [ "$POLICY_ID" != "" ]; do
         esac
 done
 
+listEntitlement=`curl -s https://api.keygen.sh/v1/accounts/$account_id/entitlements?limit=100 -g \
+  -H 'Accept: application/vnd.api+json' \
+  -H "Authorization: Bearer $token"`
+listEntitlementID=`echo $listEntitlement | jq -r '.data[] | .id'`
+entitlementIDLen=0
+idArray=(`echo $listEntitlementID | tr ' ' ' '`)
+entitlementStr=""
+for entitlementID in "${idArray[@]}"; do
+    entitlementStr="$entitlementStr \n `echo $listEntitlement | jq -r .data[$entitlementIDLen].attributes.name` =>  $entitlementIDLen"
+    let entitlementIDLen+=1
+done
 CHECK_ENTITLEMENTS=false
 declare -a ENTITLEMENTS_ARR
 until [ "$CHECK_ENTITLEMENTS" = "true" ]; do
-    echo -ne "\033[34m \nATTACK Subsystem => 1 \nTest Entitlement => 2 \nPlease choice entitlements code(type ok, when complet choice): \033[0m"
+    echo -ne "\033[34m $entitlementStr \nPlease choice entitlements code(type ok, when complet choice): \033[0m"
     read ENTITLEMENTS_CODE
-    case $ENTITLEMENTS_CODE in
-        "1") ENTITLEMENTS_ARR[$ENTITLEMENTS_CODE]="401083d1-b5cd-4bdc-96c4-5f2096672994";
-            ;;
-        "2") ENTITLEMENTS_ARR[$ENTITLEMENTS_CODE]="e2d0b4e1-0454-4eae-aa48-518bfe3bb169"
-            ;;
-        "ok") CHECK_ENTITLEMENTS="true";
-            ;;
-        *) echo -ne "\033[31mInvalid entitlements code\n\033[0m"
-            ;;
-        esac
+    ENTITLEMENTS_ID=${idArray[ENTITLEMENTS_CODE]}
+    if [ $ENTITLEMENTS_CODE == "ok" ];then
+        break
+    fi
+    re='^[0-9]+$'
+    if [[ $ENTITLEMENTS_ID != "" && $ENTITLEMENTS_CODE =~ $re ]];
+    then
+        ENTITLEMENTS_ARR[$ENTITLEMENTS_CODE]=$ENTITLEMENTS_ID
+    else
+        echo -ne "\033[31mInvalid entitlements code\n\033[0m"
+    fi
 done
 
 read MINIO_ROOT_PASSWORD <<< $(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 20)
