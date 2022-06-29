@@ -8,18 +8,22 @@ variable "config" {
     })
     vm          = object({
       db          = object({
-        user        = string
-        password    = string
-        ip          = string
-        gateway     = string
-        nameserver  = string
+        user               = string
+        password           = string
+        password-encrypted = string
+        ip                 = string
+        ip-group           = string
+        gateway            = string
+        nameserver         = string
       })
       server      = object({
-        user        = string
-        password    = string
-        ip          = string
-        gateway     = string
-        nameserver  = string
+        user               = string
+        password           = string
+        password-encrypted = string
+        ip                 = string
+        ip-group           = string
+        gateway            = string
+        nameserver         = string
       })
     })
     secret      = object({
@@ -51,6 +55,7 @@ variable "config" {
           account-id    = string
         })
       })
+      jwt-secret    = string
     })
   })
   default     = {
@@ -62,18 +67,22 @@ variable "config" {
     }
     vm          = {
       db          = {
-        user        = env("VM_DB_USER")
-        password    = env("VM_DB_PASSWORD")
-        ip          = env("VM_DB_IP")
-        gateway     = env("VM_DB_GATEWAY")
-        nameserver  = env("VM_DB_NS")
+        user               = env("VM_DB_USER")
+        password           = env("VM_DB_PASSWORD")
+        password-encrypted = env("VM_DB_PASSWORD_ENCRYPTED")
+        ip                 = env("VM_DB_IP")
+        ip-group           = env("VM_DB_IP_GROUP")
+        gateway            = env("VM_DB_GATEWAY")
+        nameserver         = env("VM_DB_NS")
       }
       server      = {
-        user        = env("VM_SERVER_USER")
-        password    = env("VM_SERVER_PASSWORD")
-        ip          = env("VM_SERVER_IP")
-        gateway     = env("VM_SERVER_GATEWAY")
-        nameserver  = env("VM_SERVER_NS")
+        user               = env("VM_SERVER_USER")
+        password           = env("VM_SERVER_PASSWORD")
+        password-encrypted = env("VM_SERVER_PASSWORD_ENCRYPTED")
+        ip                 = env("VM_SERVER_IP")
+        ip-group           = env("VM_SERVER_IP_GROUP")
+        gateway            = env("VM_SERVER_GATEWAY")
+        nameserver         = env("VM_SERVER_NS")
       }
     }
     secret      = {
@@ -91,8 +100,8 @@ variable "config" {
           password    = env("SECRET_MINIO_CORE_PASSWORD")
         }
         captain     = {
-          user        = env("SECRET_MINIO_CAPTAIN_USER")
-          password    = env("SECRET_MINIO_CAPTAIN_PASSWORD")
+          user        = env("SECRET_MINIO_CAPT_USER")
+          password    = env("SECRET_MINIO_CAPT_PASSWORD")
         }
       }
       credential    = {
@@ -105,6 +114,7 @@ variable "config" {
           account-id    = env("SECRET_KEYGEN_ACCOUNT_ID")
         }
       }
+      jwt-secret     = env("SECRET_JWT_SECRET")
     }
   }
 }

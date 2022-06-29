@@ -70,17 +70,17 @@ locals {
         join("=", ["JWT_SECRET", lookup(var.config.secret, "jwt-secret", "")]),
         join("=", ["KEYGEN_API_TOKEN", lookup(var.config.secret.credential.keygen, "api-token", "")]),
         join("=", ["KEYGEN_ACCOUNT_ID", lookup(var.config.secret.credential.keygen, "account-id", "")]),
-        join("=", ["DB_IP", lookup(var.config.secret.db, "ip", "")]),
+        join("=", ["DB_IP", split("/", lookup(var.config.vm.db, "ip", ""))[0]]),
         join("=", ["DB_USER", coalesce(lookup(var.config.secret.db, "user", "agh"), "agh")]),
-        join("=", ["DP_PASSWORD", lookup(var.config.secret.db, "password", "")]),
-        join("=", ["MINIO_ROOT_USER", coalesce(lookup(var.config.secret.minio.root, "user", "minio", ""), "minio")]),
+        join("=", ["DB_PASSWORD", lookup(var.config.secret.db, "password", "")]),
+        join("=", ["MINIO_ROOT_USER", coalesce(lookup(var.config.secret.minio.root, "user", "minio"), "minio")]),
         join("=", ["MINIO_ROOT_PASSWORD", lookup(var.config.secret.minio.root, "password", "")]),
         join("=", ["MINIO_CORE_USER", coalesce(lookup(var.config.secret.minio.core, "user", "core-minio-user"), "core-minio-user")]),
         join("=", ["MINIO_CORE_PASSWORD", lookup(var.config.secret.minio.core, "password", "")]),
         join("=", ["MINIO_CAPT_USER", coalesce(lookup(var.config.secret.minio.captain, "user", "captain-minio-user"), "captain-minio-user")]),
         join("=", ["MINIO_CAPT_PASSWORD", lookup(var.config.secret.minio.captain, "password", "")]),
         join("=", ["IMAGE_CREDENTIAL_USER", lookup(var.config.secret.credential.image, "user", "")]),
-        join("=", ["IMAGE_CREDENTIAL_USER", lookup(var.config.secret.credential.image, "password", "")]),
+        join("=", ["IMAGE_CREDENTIAL_PASSWORD", lookup(var.config.secret.credential.image, "password", "")]),
       ]
     }
   }

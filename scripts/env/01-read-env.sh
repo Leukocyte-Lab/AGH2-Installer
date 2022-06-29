@@ -1,6 +1,6 @@
 #!/bin/bash
 
-secrets=`cat out/secret.json | jq -c '. | to_entries'`;
+secrets=`cat ./out/$1.json | jq -c '. | to_entries'`;
 
 for secret in $(echo "${secrets}" | jq -r '.[] | @base64'); do
   _jq() {

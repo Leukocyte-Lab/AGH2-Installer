@@ -77,7 +77,7 @@ locals {
       ]
       env                = [
         join("=", ["DB_USER", coalesce(lookup(var.config.secret.db, "user", "agh"), "agh")]),
-        join("=", ["DP_PASSWORD", lookup(var.config.secret.db, "password", "")]),
+        join("=", ["DB_PASSWORD", lookup(var.config.secret.db, "password", "")]),
         join("=", ["MINIO_ROOT_USER", coalesce(lookup(var.config.secret.minio.root, "user", "minio"), "minio")]),
         join("=", ["MINIO_ROOT_PASSWORD", lookup(var.config.secret.minio.root, "password", "")]),
         join("=", ["MINIO_CORE_USER", coalesce(lookup(var.config.secret.minio.core, "user", "core-minio-user"), "core-minio-user")]),
@@ -85,7 +85,7 @@ locals {
         join("=", ["MINIO_CAPT_USER", coalesce(lookup(var.config.secret.minio.captain, "user", "captain-minio-user"), "captain-minio-user")]),
         join("=", ["MINIO_CAPT_PASSWORD", lookup(var.config.secret.minio.captain, "password", "")]),
         join("=", ["IMAGE_CREDENTIAL_USER", lookup(var.config.secret.credential.image, "user", "")]),
-        join("=", ["IMAGE_CREDENTIAL_USER", lookup(var.config.secret.credential.image, "password", "")]),
+        join("=", ["IMAGE_CREDENTIAL_PASSWORD", lookup(var.config.secret.credential.image, "password", "")]),
       ]
     }
   }

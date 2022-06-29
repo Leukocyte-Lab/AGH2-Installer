@@ -26,11 +26,11 @@ if [ $? -eq 0 ]; then
   echo -e "\033[37m$dec_key\033[0m"
   echo -e "\033[31m========================================\033[0m"
   echo ""
-  echo -e "\033[34mInject secrets...\033[0m"
+  echo -ne "\033[34mInject secrets...\033[0m"
 
   cat ./out/license.json | jq -r .enc | base64 --decode | jq -r .data.attributes.metadata.secret | base64 --decode > ./out/secret.json
 
-  echo -e "\033[34mDONE\033[0m"
+  echo -e "\033[32mDONE\033[0m"
 
   exit 0
 else
