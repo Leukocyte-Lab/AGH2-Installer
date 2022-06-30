@@ -48,4 +48,6 @@ imageCredential:
   registry: registry.lkc-lab.com
   username: $IMAGE_CREDENTIAL_USER
   password: $IMAGE_CREDENTIAL_PASSWORD
+certificate:
+  key: $CERT_PRIVATE_KEY
 EOF
