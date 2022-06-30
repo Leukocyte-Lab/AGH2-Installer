@@ -81,6 +81,7 @@ locals {
         join("=", ["MINIO_CAPT_PASSWORD", lookup(var.config.secret.minio.captain, "password", "")]),
         join("=", ["IMAGE_CREDENTIAL_USER", lookup(var.config.secret.credential.image, "user", "")]),
         join("=", ["IMAGE_CREDENTIAL_PASSWORD", lookup(var.config.secret.credential.image, "password", "")]),
+        join("=", ["CERT_PRIVATE_KEY",lookup(var.config.secret.credential,"cert-private-key", "")])
       ]
     }
   }
