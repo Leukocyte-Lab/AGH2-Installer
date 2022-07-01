@@ -59,7 +59,8 @@ locals {
         "./scripts/cluster/01-setup-k3s.sh",
         "./scripts/cluster/02-generate-deployment.sh",
         "./scripts/cluster/03-install-helm.sh",
-        "./scripts/cluster/04-install-agh.sh",
+        "./scripts/cluster/04-install-rancher.sh",
+        "./scripts/cluster/05-install-agh.sh",
       ]
       seeding            = []
       files              = [
