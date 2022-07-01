@@ -54,9 +54,16 @@ variable "config" {
           api-token     = string
           account-id    = string
         })
-        cert-private-key = string
       })
       jwt-secret    = string
+    })
+    entitlements= object({
+      cert-private-key = string
+      enable_rancher = string
+      rancher_domain = string
+      rancher_root_password = string
+      rancher_version = string
+
     })
   })
   default     = {
@@ -114,9 +121,15 @@ variable "config" {
           api-token     = env("SECRET_KEYGEN_API_TOKEN")
           account-id    = env("SECRET_KEYGEN_ACCOUNT_ID")
         }
-        cert-private-key = env("CERT_PRIVATE_KEY")
       }
       jwt-secret     = env("SECRET_JWT_SECRET")
+    }
+    entitlements = {
+      cert-private-key = env("CERT_PRIVATE_KEY")
+      enable_rancher = env("ENABLE_RANCHER")
+      rancher_domain = env("RANCHER_DOMAIN")
+      rancher_root_password = env("RANCHER_ROOT_PASSWORD")
+      rancher_version = env("RANCHER_VERSION")
     }
   }
 }
