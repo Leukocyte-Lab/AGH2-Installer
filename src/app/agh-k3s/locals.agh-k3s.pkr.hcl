@@ -59,7 +59,8 @@ locals {
         "./scripts/cluster/01-setup-k3s.sh",
         "./scripts/cluster/02-generate-deployment.sh",
         "./scripts/cluster/03-install-helm.sh",
-        "./scripts/cluster/04-install-agh.sh",
+        "./scripts/cluster/04-install-rancher.sh",
+        "./scripts/cluster/05-install-agh.sh",
       ]
       seeding            = []
       files              = [
@@ -81,7 +82,11 @@ locals {
         join("=", ["MINIO_CAPT_PASSWORD", lookup(var.config.secret.minio.captain, "password", "")]),
         join("=", ["IMAGE_CREDENTIAL_USER", lookup(var.config.secret.credential.image, "user", "")]),
         join("=", ["IMAGE_CREDENTIAL_PASSWORD", lookup(var.config.secret.credential.image, "password", "")]),
-        join("=", ["CERT_PRIVATE_KEY",lookup(var.config.secret.credential,"cert-private-key", "")])
+        join("=", ["CERT_PRIVATE_KEY",lookup(var.config.entitlements,"cert-private-key", "")]),
+        join("=", ["ENABLE_RANCHER",lookup(var.config.entitlements,"enable_rancher","")]),
+        join("=", ["RANCHER_DOMAIN",coalesce(lookup(var.config.entitlements,"rancher_domain","rancher.argushack.com"),"rancher.argushack.com")]),
+        join("=", ["RANCHER_ROOT_PASSWORD",coalesce(lookup(var.config.entitlements,"rancher_root_password","admin"),"admin")]),
+        join("=", ["RANCHER_VERSION",coalesce(lookup(var.config.entitlements,"rancher_version","2.6.3"),"2.6.3")]),
       ]
     }
   }

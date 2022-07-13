@@ -11,4 +11,7 @@ for entitlementItem in $(echo "${entitlementData}" | jq -r '.data[] | @base64');
     if [ $(_jq '.attributes.code') = "SSL" ]; then
       export CERT_PRIVATE_KEY=$(_jq '.attributes.metadata.privateKey')
     fi
+    if [ $(_jq '.attributes.code') = "rancher" ]; then
+      export ENABLE_RANCHER="true"
+    fi
 done
